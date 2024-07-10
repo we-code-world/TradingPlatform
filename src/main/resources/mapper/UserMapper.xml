@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DAO.UserMapper">
+
+    <!--保存一个新的用户-->
+    <insert id="save" parameterType="Entity.User">
+      insert into DB_xianyu.User(Userid,Account,password,Charge,Sex,Email,Telephone,Address,QQ,ChangeSign,AdminSign)
+      values (null, #{Account},#{password},0.00,#{Sex},#{Email},#{Telephone},#{Address},#{QQ},#{ChangeSign},#{AdminSign});
+   </insert>
+
+    <!--通过ID删除一个用户-->
+    <delete id="delete" parameterType="int">
+      delete from DB_xianyu.User where Userid=#{Userid};
+   </delete>
+
+    <!--通过ID更改用户信息-->
+    <update id="change" parameterType="Entity.User">
+      update DB_xianyu.User
+      set Account = #{Account},password = #{password},Sex = #{Sex},Email = #{Email},
+      Telephone = #{Telephone},Address=#{Address},QQ=#{QQ},ChangeSign=#{ChangeSign},AdminSign=#{AdminSign}
+      where Userid = #{Userid};
+   </update>
+
+    <!--通过ID更改用户余额-->
+    <update id="charge" parameterType="Entity.User">
+      update DB_xianyu.User
+      set Charge = #{Charge}
+      where Userid = #{Userid};
+   </update>
+
+    <!--通过ID保存用户更改信息记录-->
+    <update id="changeMsg" parameterType="Entity.User">
+      update DB_xianyu.User
+      set changeUser= #{changeUser},ChangeSign=#{ChangeSign},AdminSign=#{AdminSign}
+      where Userid = #{Userid};
+   </update>
+
+    <!--通过ID查找用户-->
+    <select id="findByID" resultType="Entity.User">
+      select * from DB_xianyu.User
+      where Userid = #{Userid}
+   </select>
+
+    <!--通过账号查找用户-->
+    <select id="findByAccount" resultType="Entity.User" parameterType="String">
+      select * from DB_xianyu.User
+      where Account = #{Account}
+   </select>
+
+    <!--查找更改信息的用户-->
+    <select id="findByChangeSign" resultType="Entity.User">
+        select * from DB_xianyu.User
+      where ChangeSign != 0
+    </select>
+
+    <!--查找所有用户-->
+    <select id="findAll" resultType="Entity.User">
+      SELECT * from DB_xianyu.User
+      where ChangeSign=0
+   </select>
+
+</mapper>

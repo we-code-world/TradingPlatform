@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DAO.WtsMapper">
+    <!--上传一个新的商品-->
+    <insert id="save" parameterType="Entity.WTS">
+        insert into DB_xianyu.WTS(Sellid,Sellname,Wtsdata,Pictureurl,Wprice,Userid,catelogId,Administrator_agree)
+        values (null,#{Sellname},#{Wtsdata},#{Pictureurl},#{Wprice},#{Userid},#{catelogId},#{Administrator_agree});
+    </insert>
+    <!--通过ID删除一个商品-->
+    <delete id="delete" parameterType="int">
+        delete from DB_xianyu.WTS where Sellid=#{Sellid};
+    </delete>
+    <!--通过ID更新一个商品-->
+    <update id="updateByID" parameterType="Entity.WTS">
+        update DB_xianyu.WTS
+        set Sellname=#{Sellname},Wtsdata=#{Wtsdata},Wprice=#{Wprice},
+        Userid=#{Userid},catelogId=#{catelogId},Administrator_agree=#{Administrator_agree}
+        where Sellid=#{Sellid}
+    </update>
+    <!--通过ID查找一个商品-->
+    <select id="findByID" resultType="Entity.WTS" parameterType="int">
+        select * from DB_xianyu.WTS
+        where Sellid=#{Sellid}
+    </select>
+    <!--通过求购用户和管理员确认查找商品-->
+    <select id="findByUserAndAA" resultType="Entity.WTS" parameterType="int">
+        select * from DB_xianyu.WTS
+        where Userid=#{Userid},Administrator_agree=#{Administrator_agree}
+    </select>
+    <!--查找所有的商品-->
+    <select id="findAll" resultType="Entity.WTS">
+        select * from DB_xianyu.WTS
+    </select>
+
+</mapper>

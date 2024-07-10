@@ -1,0 +1,45 @@
+package com.wangdi.tradingplatform.Controller;
+
+import com.wangdi.tradingplatform.Entity.Cart;
+import com.wangdi.tradingplatform.Entity.Goods;
+import com.wangdi.tradingplatform.Entity.User;
+import com.wangdi.tradingplatform.Service.CartService;
+import com.wangdi.tradingplatform.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Controller
+@RequestMapping("/Buy")
+public class BuyController {
+    @Autowired
+    @Qualifier("UserServiceImpl")
+    private UserService userService;
+    @Autowired
+    @Qualifier("CartServiceImpl")
+    private CartService cartService;
+
+    @RequestMapping("/show")
+    public String SHOW(Model model,int userid){
+        User user=userService.findByID(userid);
+        Cart user_cart=cartService.findByUser(user.getId());
+        model.addAttribute("user",user);
+        model.addAttribute("user_cart",user_cart);
+        return "wtb";
+    }
+    @RequestMapping("/submit")
+    @ResponseBody
+    public Map<String,Object> sub(Goods goods){
+        Map<String,Object> map=new HashMap<String,Object>();
+        if(goods.getName()!=null&&goods.getRealPrice()!=0.0&&goods.getOwnerId()!=0){
+            map.put("result","ok");
+        }else map.put("result","error");
+        return map;
+    }
+}
