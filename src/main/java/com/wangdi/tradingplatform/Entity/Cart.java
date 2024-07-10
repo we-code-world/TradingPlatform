@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 @Data
 @TableName("T_cart")
 public class Cart {
-    private int id;
-    private int userId;
+    private Integer id;
+    private Integer userId;
     private String goodsId;
-    private int goodsNum;
-    private double priceSum;
+    private Integer goodsNum;
+    private Double priceSum;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 

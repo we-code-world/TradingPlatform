@@ -3,7 +3,6 @@ package com.wangdi.tradingplatform.Service;
 import com.wangdi.tradingplatform.DAO.AdministratorMapper;
 import com.wangdi.tradingplatform.Entity.Administrator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

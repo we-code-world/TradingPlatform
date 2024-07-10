@@ -3,6 +3,8 @@ package com.wangdi.tradingplatform.Controller;
 import com.wangdi.tradingplatform.Entity.*;
 import com.wangdi.tradingplatform.Service.*;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 @Data
 @TableName("T_user")
 public class User {
-    private int id;        //用户ID
+    private Integer id;        //用户ID
     private String account;    //用户账号
     private String password;   //用户密码
-    private double charge;     //用户余额
-    private int sex;           //用户性别,1为男，0为女
+    private Double charge;     //用户余额
+    private Integer sex;           //用户性别,1为男，0为女
     private String email;      //用户邮箱
     private String telephone;  //用户手机号码
     private String address;    //用户详细地址
