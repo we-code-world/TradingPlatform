@@ -1,7 +1,9 @@
 package com.wangdi.tradingplatform.Controller;
 
+import com.wangdi.tradingplatform.Annotation.AccessLimit;
 import com.wangdi.tradingplatform.Entity.*;
 import com.wangdi.tradingplatform.Service.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,15 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/Login")
 public class LoginController {
-    @Autowired
-    @Qualifier("AdministratorServiceImpl")
-    private AdministratorService administratorService;
-    @Autowired
-    @Qualifier("UserServiceImpl")
-    private UserService userService;
+    private final AdministratorService administratorService;
+    private final UserService userService;
 
+    @AccessLimit(seconds = 10, maxCount = 20)
     @RequestMapping("/show")
     public String login(){
         return "login";

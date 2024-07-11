@@ -2,6 +2,7 @@ package com.wangdi.tradingplatform.Controller;
 
 import com.wangdi.tradingplatform.Entity.*;
 import com.wangdi.tradingplatform.Service.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
@@ -12,24 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/Personal")
 public class UserController {
-    @Autowired
-    @Qualifier("UserServiceImpl")
-    private UserService userService;
-    @Autowired
-    @Qualifier("TransactionServiceImpl")
-    private TransactionService transactionService;
-    @Autowired
-    @Qualifier("GoodsServiceImpl")
-    private GoodsService goodsService;
-    @Autowired
-    @Qualifier("CartServiceImpl")
-    private CartService cartService;
-    private User user;
+    private final UserService userService;
+    private final TransactionService transactionService;
+    private final GoodsService goodsService;
+    private final CartService cartService;
+
     @RequestMapping("/index")
     public String personal(Model model,int userid){
-        user=userService.findByID(userid);
+        User user=userService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("user_cart",user_cart);
@@ -37,7 +31,7 @@ public class UserController {
     }
     @RequestMapping("/show")
     public String personalpage(Model model,int userid){
-        user=userService.findByID(userid);
+        User user=userService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("user_cart",user_cart);
@@ -45,7 +39,7 @@ public class UserController {
     }
     @RequestMapping("/record")
     public String personalrecord(int userid,Model model){
-        user=userService.findByID(userid);
+        User user=userService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         List<Transaction> t_s=transactionService.findBySeller(userid);
         List<Transaction> t_b=transactionService.findByBuyer(userid);
@@ -69,7 +63,7 @@ public class UserController {
         goods.setOwnerId(userid);
         goods.setType(0);
         List<Goods> list_b=goodsService.findByGoods(goods);
-        user=userService.findByID(userid);
+        User user=userService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("Buys",list_b);
@@ -82,7 +76,7 @@ public class UserController {
         goods.setOwnerId(userid);
         goods.setType(0);
         List<Goods> list_s= goodsService.findByGoods(goods);
-        user=userService.findByID(userid);
+        User user=userService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("Sells",list_s);

@@ -1,12 +1,12 @@
-package com.wangdi.tradingplatform.Service;
+package com.wangdi.tradingplatform.Service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wangdi.tradingplatform.DAO.GoodsMapper;
 import com.wangdi.tradingplatform.Entity.Goods;
+import com.wangdi.tradingplatform.Service.GoodsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

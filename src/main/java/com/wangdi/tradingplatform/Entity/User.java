@@ -1,8 +1,10 @@
 package com.wangdi.tradingplatform.Entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +25,8 @@ public class User {
     private String qqAccount;         //用户QQ账号
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    @TableField(exist = false)
     private int changeSign;    //用户信息更改标志,0为未更改，1为更改,2为新注册
+    @TableField(exist = false)
     private int adminSign;     //管理员审核标志,0为未审核，1为未通过，2为通过
 }

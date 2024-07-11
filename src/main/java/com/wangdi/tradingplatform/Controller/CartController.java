@@ -8,6 +8,7 @@ import com.wangdi.tradingplatform.Service.CartService;
 import com.wangdi.tradingplatform.Service.GoodsService;
 import com.wangdi.tradingplatform.Service.TransactionService;
 import com.wangdi.tradingplatform.Service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,20 +20,13 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/Cart")
 public class CartController {
-    @Autowired
-    @Qualifier("CartServiceImpl")
-    private CartService cartService;
-    @Autowired
-    @Qualifier("UserServiceImpl")
-    private UserService userService;
-    @Autowired
-    @Qualifier("GoodsServiceImpl")
-    private GoodsService goodsService;
-    @Autowired
-    @Qualifier("TransactionServiceImpl")
-    private TransactionService transactionService;
+    private final CartService cartService;
+    private final UserService userService;
+    private final GoodsService goodsService;
+    private final TransactionService transactionService;
 
     @RequestMapping("/show")
     public String showCart(int userid,Model model){

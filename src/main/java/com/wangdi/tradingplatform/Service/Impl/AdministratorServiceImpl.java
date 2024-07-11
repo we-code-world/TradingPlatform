@@ -1,7 +1,8 @@
-package com.wangdi.tradingplatform.Service;
+package com.wangdi.tradingplatform.Service.Impl;
 
 import com.wangdi.tradingplatform.DAO.AdministratorMapper;
 import com.wangdi.tradingplatform.Entity.Administrator;
+import com.wangdi.tradingplatform.Service.AdministratorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

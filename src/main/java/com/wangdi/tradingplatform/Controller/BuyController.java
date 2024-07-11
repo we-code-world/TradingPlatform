@@ -5,6 +5,7 @@ import com.wangdi.tradingplatform.Entity.Goods;
 import com.wangdi.tradingplatform.Entity.User;
 import com.wangdi.tradingplatform.Service.CartService;
 import com.wangdi.tradingplatform.Service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/Buy")
 public class BuyController {
-    @Autowired
-    @Qualifier("UserServiceImpl")
-    private UserService userService;
-    @Autowired
-    @Qualifier("CartServiceImpl")
-    private CartService cartService;
+    private final UserService userService;
+    private final CartService cartService;
 
     @RequestMapping("/show")
     public String SHOW(Model model,int userid){

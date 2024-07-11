@@ -20,4 +20,9 @@ public interface UserService {
     List<User> findAll();
     //分页查找所有用户
     PageInfo<User> pageAll(int pageNum,int pageSize);
+
+    // 判断是否存在账号
+    boolean hasAccount(String account);
+    // 注册用户
+    boolean register(User user);
 }

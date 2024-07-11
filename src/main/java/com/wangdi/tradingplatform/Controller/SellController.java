@@ -5,6 +5,7 @@ import com.wangdi.tradingplatform.Entity.*;
 import com.wangdi.tradingplatform.Service.*;
 import com.wangdi.tradingplatform.Tools.CommonUtils;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,14 +20,11 @@ import java.io.IOException;
 import java.util.*;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/Sell")
 public class SellController {
-    @Autowired
-    @Qualifier("UserServiceImpl")
-    private UserService userService;
-    @Autowired
-    @Qualifier("CartServiceImpl")
-    private CartService cartService;
+    private final UserService userService;
+    private final CartService cartService;
     @Autowired
     @Qualifier("GoodsServiceImpl")
     private GoodsService goodsService;

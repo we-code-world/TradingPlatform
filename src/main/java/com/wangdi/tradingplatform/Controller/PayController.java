@@ -11,6 +11,7 @@ import com.alipay.api.internal.util.*;
 import com.alipay.api.request.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -25,11 +26,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/Pay")
 public class PayController {
-    @Autowired
-    @Qualifier("UserServiceImpl")
-    private UserService userService;
+    private final UserService userService;
 
     @RequestMapping("/checkout")
     @ResponseBody

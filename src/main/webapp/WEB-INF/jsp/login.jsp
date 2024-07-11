@@ -85,7 +85,7 @@
             <p>
                 <label>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" class="a-radio" name="person"  id="user"   value="users"checked="checked"/>
+                    <input type="radio" class="a-radio" name="person"  id="user"   value="users" checked="checked"/>
                     <span class="b-radio"></span>∆’Õ®”√ªß
                 </label>
                 &nbsp;&nbsp;&nbsp;&nbsp;

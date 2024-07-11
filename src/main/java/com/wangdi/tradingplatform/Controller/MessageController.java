@@ -4,6 +4,7 @@ import com.wangdi.tradingplatform.Entity.Message;
 import com.wangdi.tradingplatform.Entity.User;
 import com.wangdi.tradingplatform.Service.MessageService;
 import com.wangdi.tradingplatform.Service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,11 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/Message")
 public class MessageController {
-    @Autowired
-    @Qualifier("MessageServiceImpl")
-    private MessageService messageService;
-    @Autowired
-    @Qualifier("UserServiceImpl")
-    private UserService userService;
+    private final MessageService messageService;
+    private final UserService userService;
     @RequestMapping("/chat")
     @ResponseBody
     public Map<String,Object> chat(int id, int userid){

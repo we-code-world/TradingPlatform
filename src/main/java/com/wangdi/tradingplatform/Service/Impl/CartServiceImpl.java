@@ -1,10 +1,10 @@
-package com.wangdi.tradingplatform.Service;
+package com.wangdi.tradingplatform.Service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wangdi.tradingplatform.DAO.CartMapper;
 import com.wangdi.tradingplatform.Entity.Cart;
+import com.wangdi.tradingplatform.Service.CartService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor

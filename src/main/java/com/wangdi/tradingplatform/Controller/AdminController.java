@@ -1,10 +1,10 @@
 package com.wangdi.tradingplatform.Controller;
 
+import com.wangdi.tradingplatform.Annotation.AccessLimit;
 import com.wangdi.tradingplatform.Entity.*;
 import com.wangdi.tradingplatform.Service.*;
 import com.github.pagehelper.PageInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,29 +12,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/Admin")
+@AccessLimit(maxCount = 10, seconds = 5)
 public class AdminController {
-    @Autowired
-    @Qualifier("AdministratorServiceImpl")
-    private AdministratorService administratorService;
-    @Autowired
-    @Qualifier("UserServiceImpl")
-    private UserService userService;
-    @Autowired
-    @Qualifier("GoodsServiceImpl")
-    private GoodsService goodsService;
-    @Autowired
-    @Qualifier("TransactionServiceImpl")
-    private TransactionService transactionService;
+    private final UserService userService;
+    private final LoginService loginService;
+    private final GoodsService goodsService;
+    private final TransactionService transactionService;
+    private final AdministratorService administratorService;
+
     @RequestMapping("/index")
-    public String showIndexPage(int id, Model model){
-        Administrator administrator=administratorService.findByID(id);
+    public String showIndexPage(Model model){
+        Administrator administrator=loginService.getLoginAdmin("");
         model.addAttribute("admin",administrator);
         return "administrator";
     }

@@ -1,13 +1,12 @@
-package com.wangdi.tradingplatform.Service;
+package com.wangdi.tradingplatform.Service.Impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wangdi.tradingplatform.DAO.UserMapper;
 import com.wangdi.tradingplatform.Entity.User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wangdi.tradingplatform.Service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,5 +45,15 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(pageNum,pageSize);
         List<User> list = userMapper.selectList(null);
         return new PageInfo<User>(list);
+    }
+
+    @Override
+    public boolean hasAccount(String account) {
+        return false;
+    }
+
+    @Override
+    public boolean register(User user) {
+        return false;
     }
 }
