@@ -17,4 +17,6 @@ public interface MessageService {
     List<Message> findByUser(int uid);
     //根据发送方和接受方查找消息列表
     List<Message> findBothSide(Message message);
+
+    boolean send(int id, int uid, String text);
 }

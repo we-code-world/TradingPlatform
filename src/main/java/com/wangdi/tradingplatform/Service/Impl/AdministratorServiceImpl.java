@@ -1,5 +1,6 @@
 package com.wangdi.tradingplatform.Service.Impl;
 
+import com.wangdi.tradingplatform.Annotation.LogAnnotation;
 import com.wangdi.tradingplatform.DAO.AdministratorMapper;
 import com.wangdi.tradingplatform.Entity.Administrator;
 import com.wangdi.tradingplatform.Service.AdministratorService;
@@ -17,7 +18,9 @@ public class AdministratorServiceImpl implements AdministratorService {
         return administratorMapper.add(admin);
     }
     //根据ID删除一个管理员
+    @LogAnnotation
     public int delete(int id){
+        System.out.println(id);
         return administratorMapper.delete(id);
     }
     //通过账号查找管理员

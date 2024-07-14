@@ -5,15 +5,15 @@ import com.wangdi.tradingplatform.DAO.UserMapper;
 import com.wangdi.tradingplatform.Entity.User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.wangdi.tradingplatform.Service.UserService;
+import com.wangdi.tradingplatform.Service.ManageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 @RequiredArgsConstructor
-@Service("UserServiceImpl")
-public class UserServiceImpl implements UserService {
+public class ManageServiceImpl implements ManageService {
     private final UserMapper userMapper;
     //保存一个新的用户
     public int save(User user){

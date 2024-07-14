@@ -3,8 +3,6 @@ package com.wangdi.tradingplatform.Controller;
 import com.wangdi.tradingplatform.Entity.*;
 import com.wangdi.tradingplatform.Service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,14 +14,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/Personal")
 public class UserController {
-    private final UserService userService;
+    private final ManageService manageService;
     private final TransactionService transactionService;
     private final GoodsService goodsService;
     private final CartService cartService;
 
     @RequestMapping("/index")
     public String personal(Model model,int userid){
-        User user=userService.findByID(userid);
+        User user= manageService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("user_cart",user_cart);
@@ -31,7 +29,7 @@ public class UserController {
     }
     @RequestMapping("/show")
     public String personalpage(Model model,int userid){
-        User user=userService.findByID(userid);
+        User user= manageService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("user_cart",user_cart);
@@ -39,7 +37,7 @@ public class UserController {
     }
     @RequestMapping("/record")
     public String personalrecord(int userid,Model model){
-        User user=userService.findByID(userid);
+        User user= manageService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         List<Transaction> t_s=transactionService.findBySeller(userid);
         List<Transaction> t_b=transactionService.findByBuyer(userid);
@@ -63,7 +61,7 @@ public class UserController {
         goods.setOwnerId(userid);
         goods.setType(0);
         List<Goods> list_b=goodsService.findByGoods(goods);
-        User user=userService.findByID(userid);
+        User user= manageService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("Buys",list_b);
@@ -76,7 +74,7 @@ public class UserController {
         goods.setOwnerId(userid);
         goods.setType(0);
         List<Goods> list_s= goodsService.findByGoods(goods);
-        User user=userService.findByID(userid);
+        User user= manageService.findByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("Sells",list_s);
@@ -92,7 +90,7 @@ public class UserController {
     @RequestMapping("/update")
     public String updateINFO(User user,Model model){
         int id=user.getId();
-        User user1=userService.findByID(id);
+        User user1= manageService.findByID(id);
         // 实现一下User的equals函数
         // 放入消息队列让管理员审核
         Cart user_cart=cartService.findByUser(user.getId());

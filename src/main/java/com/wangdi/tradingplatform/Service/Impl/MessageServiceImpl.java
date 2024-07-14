@@ -35,4 +35,13 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> findBothSide(Message message){
         return messageMapper.selectList(new QueryWrapper<Message>().eq("sender_id", message.getSenderId()).eq("receiver_id", message.getReceiverId()));
     }
+
+    @Override
+    public boolean send(int id, int uid, String text) {
+        Message msg=new Message();
+        msg.setReceiverId(id);
+        msg.setSenderId(uid);
+        msg.setContent(text);
+        return save(msg) != 0;
+    }
 }

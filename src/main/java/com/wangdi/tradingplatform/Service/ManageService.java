@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
-public interface UserService {
+public interface ManageService {
     //保存一个新的用户
     int save(User user);
     //通过ID删除一个用户

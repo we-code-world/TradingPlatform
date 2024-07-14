@@ -1,7 +1,7 @@
 package com.wangdi.tradingplatform.Controller;
 
 import com.wangdi.tradingplatform.Entity.User;
-import com.wangdi.tradingplatform.Service.UserService;
+import com.wangdi.tradingplatform.Service.ManageService;
 import com.wangdi.tradingplatform.Tools.AlipayConfig;
 import com.wangdi.tradingplatform.Tools.CommonUtils;
 import com.wangdi.tradingplatform.Tools.DateUtils;
@@ -12,8 +12,6 @@ import com.alipay.api.request.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +27,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/Pay")
 public class PayController {
-    private final UserService userService;
+    private final ManageService manageService;
 
     @RequestMapping("/checkout")
     @ResponseBody
     public Map<String,Object> check_out(int uid,double sum){
         Map<String,Object> map=new HashMap<String,Object>();
-        User user=userService.findByID(uid);
+        User user= manageService.findByID(uid);
         if(user.getCharge()!=0&&user.getCharge()>=sum){
             map.put("result","ok");
         }else {
@@ -90,9 +88,9 @@ public class PayController {
             //out.println("trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount);
             userid=Integer.parseInt(out_trade_no.substring(0,5));
             double charge=Double.parseDouble(total_amount);
-            User user=userService.findByID(userid);
+            User user= manageService.findByID(userid);
             user.setCharge(user.getCharge()+charge);
-            userService.change(user);
+            manageService.change(user);
             return "forward:/Personal/index?userid="+userid;
         } else {
             model.addAttribute("msg","signVerified_error");

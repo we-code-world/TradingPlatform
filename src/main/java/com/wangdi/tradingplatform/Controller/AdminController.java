@@ -5,8 +5,6 @@ import com.wangdi.tradingplatform.Entity.*;
 import com.wangdi.tradingplatform.Service.*;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +20,7 @@ import java.util.Map;
 @RequestMapping("/Admin")
 @AccessLimit(maxCount = 10, seconds = 5)
 public class AdminController {
-    private final UserService userService;
+    private final ManageService manageService;
     private final LoginService loginService;
     private final GoodsService goodsService;
     private final TransactionService transactionService;
@@ -39,7 +37,7 @@ public class AdminController {
     @RequestMapping("/userinfo")
     public String user(@RequestParam("id") int id, Model model){
         Administrator administrator=administratorService.findByID(id);
-        List<User> list=userService.findAll();
+        List<User> list= manageService.findAll();
         model.addAttribute("admin",administrator);
         model.addAttribute("users",list);
         return "ad_info";
@@ -47,7 +45,7 @@ public class AdminController {
     @RequestMapping("/pageuserinfo")
     public String pageuser(int id,int pageNum,int pageSize ,Model model){
         Administrator administrator=administratorService.findByID(id);
-        PageInfo<User> list=userService.pageAll(pageNum,pageSize);
+        PageInfo<User> list= manageService.pageAll(pageNum,pageSize);
         //PageInfo<User> pagelist=userService.pageByChangeSign();
         model.addAttribute("admin",administrator);
         model.addAttribute("users",list);
@@ -140,7 +138,7 @@ public class AdminController {
     public Map<String,Object> getuser(int id){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            User user=userService.findByID(id);
+            User user= manageService.findByID(id);
             map.put("user",user);
             map.put("result","ok");
         }catch (Exception e){
@@ -191,11 +189,11 @@ public class AdminController {
     public Map<String,Object> USERpass(int id){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            User user=userService.findByID(id);
+            User user= manageService.findByID(id);
             // 消费消息队列中的待审核信息
             // User user1 = kafka.getMessage();
             // 保存用户信息到数据库
-            userService.change(user);
+            manageService.change(user);
             map.put("result","ok");
         }catch (Exception e){
             map.put("result","error");
@@ -242,8 +240,8 @@ public class AdminController {
     public Map<String,Object> userRefuse(int id){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            User user=userService.findByID(id);
-            userService.change(user);
+            User user= manageService.findByID(id);
+            manageService.change(user);
             map.put("result","ok");
         }catch (Exception e){
             map.put("result","error");

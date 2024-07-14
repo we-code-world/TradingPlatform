@@ -7,16 +7,13 @@ import com.wangdi.tradingplatform.Entity.User;
 import com.wangdi.tradingplatform.Service.CartService;
 import com.wangdi.tradingplatform.Service.GoodsService;
 import com.wangdi.tradingplatform.Service.TransactionService;
-import com.wangdi.tradingplatform.Service.UserService;
+import com.wangdi.tradingplatform.Service.ManageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -24,7 +21,7 @@ import java.util.*;
 @RequestMapping("/Cart")
 public class CartController {
     private final CartService cartService;
-    private final UserService userService;
+    private final ManageService manageService;
     private final GoodsService goodsService;
     private final TransactionService transactionService;
 
@@ -111,9 +108,9 @@ public class CartController {
         Map<String,Object> map=new HashMap<String,Object>();
         Cart user_cart=cartService.findByID(cartid);
         int userid=user_cart.getUserId();
-        User user=userService.findByID(userid);
+        User user= manageService.findByID(userid);
         user.setCharge(user.getCharge()-user_cart.getPriceSum());
-        userService.change(user);
+        manageService.change(user);
         int []goods=user_cart.showGoods();
         for (int good:goods) {
             Goods sell=goodsService.findByID(good);

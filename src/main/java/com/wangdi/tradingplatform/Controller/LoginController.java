@@ -4,8 +4,6 @@ import com.wangdi.tradingplatform.Annotation.AccessLimit;
 import com.wangdi.tradingplatform.Entity.*;
 import com.wangdi.tradingplatform.Service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +18,7 @@ import java.util.Map;
 @RequestMapping("/Login")
 public class LoginController {
     private final AdministratorService administratorService;
-    private final UserService userService;
+    private final ManageService manageService;
 
     @AccessLimit(seconds = 10, maxCount = 20)
     @RequestMapping("/show")
@@ -38,7 +36,7 @@ public class LoginController {
     @ResponseBody
     public Map<String,Object> login_user(String Account, String password) {
         Map<String,Object> map=new HashMap<String,Object>();
-        User user=userService.findByAccount(Account);
+        User user= manageService.findByAccount(Account);
         if(user!=null&&password.equals(user.getPassword())){
             map.put("role","user");
             map.put("userid",user.getId());
