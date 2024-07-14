@@ -34,6 +34,10 @@ public interface Cache {
      */
     <T> T get(@NotBlank String key, Class<T> clazz);
 
+    void flushKey(String key);
+
+    String updateKey(String oldKey, String key);
+
     /**
      * 放入缓存
      */

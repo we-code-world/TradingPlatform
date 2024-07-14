@@ -47,6 +47,8 @@ public class PasswordUtils {
         String salt = stringBuilder.toString();
         //将盐加到明文中，并生成新的MD5码
         password = md5Hex(password + salt);
+
+        System.out.println(password.length());
         //将盐混到新生成的MD5码中
         char[] cs = new char[48];
         for (int i = 0; i < 48; i += 3) {
@@ -59,6 +61,7 @@ public class PasswordUtils {
     }
 
     public static boolean verifySaltPassword(String password, String md5) {
+        if(password == null || password.isEmpty()) return false;
         //先从MD5码中取出之前加的盐和加盐后生成的MD5码
         char[] cs1 = new char[32];
         char[] cs2 = new char[16];

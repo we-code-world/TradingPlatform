@@ -20,7 +20,6 @@ public class LoginController {
     private final AdministratorService administratorService;
     private final ManageService manageService;
 
-    @AccessLimit(seconds = 10, maxCount = 20)
     @RequestMapping("/show")
     public String login(){
         return "login";

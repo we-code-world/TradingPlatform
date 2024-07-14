@@ -8,6 +8,7 @@ import com.wangdi.tradingplatform.Entity.Transaction;
 import com.wangdi.tradingplatform.Entity.User;
 import com.wangdi.tradingplatform.Service.AdministratorService;
 import com.wangdi.tradingplatform.Service.Impl.AdministratorServiceImpl;
+import com.wangdi.tradingplatform.Tools.PasswordUtils;
 import com.wangdi.tradingplatform.Tools.TokenUtils;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -54,6 +55,12 @@ class TradingPlatformApplicationTests {
         System.out.println(token);
         User res = TokenUtils.design(token, "user_id", User.class);
         System.out.println(res);
+    }
+
+    @Test
+    public void testPasswordUtils(){
+        String passwd = PasswordUtils.generateSaltPassword("");
+        System.out.println(passwd.length());
     }
 
 }

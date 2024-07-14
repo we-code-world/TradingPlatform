@@ -62,10 +62,25 @@ public class StringRedisTemplateProxy implements DistributedCache {
     @Override
     public <T> T get(String key, Class<T> clazz) {
         String value = stringRedisTemplate.opsForValue().get(key);
+        if (isNullOrBlank(value)) return null;
+        flushKey(key);
         if (String.class.isAssignableFrom(clazz)) {
             return (T) value;
         }
         return JSON.parseObject(value, JsonUtils.buildType(clazz));
+    }
+
+    @Override
+    public void flushKey(String key){
+        stringRedisTemplate.expire(key, valueTimeout, valueTimeUnit);
+    }
+
+    @Override
+    public String updateKey(String oldKey, String key){
+        String value = stringRedisTemplate.opsForValue().get(oldKey);
+        delete(oldKey);
+        put(key, value, valueTimeout, valueTimeUnit);
+        return key;
     }
 
     @Override

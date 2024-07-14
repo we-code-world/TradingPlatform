@@ -15,7 +15,7 @@ public class TokenUtils {
     private static final String TOKEN_SALT = "token-salt";
     private static final String ISSUER = "token";
 
-    public static String sign(String value){
+    public static <T> String sign(T value){
         return sign("user_id", value);
     }
 
@@ -35,6 +35,16 @@ public class TokenUtils {
             e.printStackTrace();
         }
         return token;
+    }
+
+    public static boolean verify(String token){
+        try {
+            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(TOKEN_SALT)).withIssuer(ISSUER).build();
+            verifier.verify(token);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
     public static String design(String token){
