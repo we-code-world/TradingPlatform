@@ -14,14 +14,18 @@ public class TokenUtils {
     private static final String TOKEN_SALT = "token-salt";
     private static final String ISSUER = "token";
 
-    public static <T> String sign(String name, T value){
+    public static String sign(String value){
+        return sign("user_id", value);
+    }
+
+    public static String sign(String name, String value){
         String token = null;
         try {
             Date now = new Date();
             Date expire_time = new Date(System.currentTimeMillis() + EXPIRE_TIME);
             token = JWT.create()
                     .withIssuer(ISSUER)
-                    .withClaim(name, value.toString())
+                    .withClaim(name, value)
                     .withIssuedAt(now)
                     .withExpiresAt(expire_time)
                     .sign(Algorithm.HMAC256(TOKEN_SALT));
@@ -30,6 +34,11 @@ public class TokenUtils {
         }
         return token;
     }
+
+    public static String design(String token){
+        return design(token, "user_id");
+    }
+
     public static String design(String token, String name){
 
         try {
@@ -38,6 +47,7 @@ public class TokenUtils {
             log.info("认证通过");
             return jwt.getClaim(name).asString();
         } catch (Exception e){
+            e.printStackTrace();
             log.warn("认证失败");
             return null;
         }

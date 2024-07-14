@@ -36,9 +36,12 @@ class TradingPlatformApplicationTests {
     }
     @Test
     public void testTokenUtils(){
-        String token = TokenUtils.sign("user_id", 1);
+        User user = new User();
+        user.setAccount("wangdi");
+        user.setPassword("wangdi");
+        String token = TokenUtils.sign("user_id", user.toString());
         System.out.println(token);
-        String res = TokenUtils.design(token, "user_id");
+        String res = TokenUtils.design(token);
         System.out.println(res);
     }
 

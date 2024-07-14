@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -29,12 +30,14 @@ public class AdminController {
 
     @RequestMapping("/index")
     public String showIndexPage(Model model){
-        Administrator administrator=loginService.getLoginAdmin("");
+//        Administrator administrator=loginService.getLoginAdmin("");
+        Administrator administrator = administratorService.findByID(1);
+        System.out.println(administrator.getId());
         model.addAttribute("admin",administrator);
         return "administrator";
     }
     @RequestMapping("/userinfo")
-    public String user(int id, Model model){
+    public String user(@RequestParam("id") int id, Model model){
         Administrator administrator=administratorService.findByID(id);
         List<User> list=userService.findAll();
         model.addAttribute("admin",administrator);

@@ -49,16 +49,16 @@
 		<div class="navbar-collapse justify-content-end collapse" id="navbarDefault" style="">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Sell/index?userid=${requestScope.get('userid')}" style="font-size: 20px">首页</a>
+					<a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Sell/index" style="font-size: 20px">首页</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Buy/show?userid=${requestScope.get('userid')}" style="font-size: 20px">发布求购</a>
+					<a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Buy/show" style="font-size: 20px">发布求购</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Sell/show?userid=${requestScope.get('userid')}" style="font-size: 20px">发布商品</a>
+					<a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Sell/show" style="font-size: 20px">发布商品</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Personal/index?userid=${requestScope.get('userid')}" style="font-size: 20px">个人主页</a>
+					<a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Personal/index" style="font-size: 20px">个人主页</a>
 				</li>
 
 

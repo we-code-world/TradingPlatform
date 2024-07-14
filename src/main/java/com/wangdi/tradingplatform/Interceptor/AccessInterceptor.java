@@ -24,6 +24,7 @@ public class AccessInterceptor implements HandlerInterceptor {
             boolean login = accessLimit.needLogin();
             if(login){
                 System.out.println("ACCESS!");
+                System.out.println(request.getRequestURI());
             }
         }
         return HandlerInterceptor.super.preHandle(request, response, handler);

@@ -48,7 +48,7 @@
     <div id="headers">
         <div style="float:left;height:50px;background-color:#323232;margin-top: 230px">
             <div style="float:left;background-color:rgb(39,169,227);height:50px;width:220px;">
-                <a href="${pageContext.request.contextPath}/Admin/index?id=${requestScope.get('admin').getUserid()}">
+                <a href="${pageContext.request.contextPath}/Admin/index?id=${requestScope.get('admin').getId()}">
                     <p style="font-size:30px;text-align:center;color: black">回到首页</p>
                 </a>
             </div>
@@ -59,25 +59,25 @@
         <li class="submenu"><a href="#"><i class="icon icon-group"></i>
             <span>用户信息审核</span> </a>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/Admin/pageuserinfo?id=${requestScope.get('admin').getUserid()}&&pageNum=1&&pageSize=10">用户信息列表</a></li>
+                <li><a href="${pageContext.request.contextPath}/Admin/pageuserinfo?id=${requestScope.get('admin').getId()}&&pageNum=1&&pageSize=10">用户信息列表</a></li>
             </ul>
         </li>
         <li class="submenu"><a href="#"><i class="icon icon-signal"></i>
             <span>求购审核</span> </a>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/Admin/pagewtb?id=${requestScope.get('admin').getUserid()}&&pageNum=1&&pageSize=10">求购信息列表</a></li>
+                <li><a href="${pageContext.request.contextPath}/Admin/pagewtb?id=${requestScope.get('admin').getId()}&&pageNum=1&&pageSize=10">求购信息列表</a></li>
             </ul>
         </li>
         <li class="submenu"><a href="#"><i class="icon icon-th"></i>
             <span>求卖审核</span> </a>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/Admin/pagewts?id=${requestScope.get('admin').getUserid()}&&pageNum=1&&pageSize=10">求卖信息列表</a></li>
+                <li><a href="${pageContext.request.contextPath}/Admin/pagewts?id=${requestScope.get('admin').getId()}&&pageNum=1&&pageSize=10">求卖信息列表</a></li>
             </ul>
         </li>
         <li class="submenu"><a href="#"><i class="icon icon-inbox"></i>
             <span>交易审核</span> </a>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/Admin/pagedeal?id=${requestScope.get('admin').getUserid()}&&pageNum=1&&pageSize=10">交易信息列表</a></li>
+                <li><a href="${pageContext.request.contextPath}/Admin/pagedeal?id=${requestScope.get('admin').getId()}&&pageNum=1&&pageSize=10">交易信息列表</a></li>
             </ul>
         </li>
     </ul>
@@ -91,18 +91,18 @@
         <div class="quick-actions_homepage">
             <ul class="quick-actions">
                 <li class="bg_lb"><a
-                        href="${pageContext.request.contextPath}/Admin/pageuserinfo?id=${requestScope.get('admin').getUserid()}&&pageNum=1&&pageSize=10"> <i
+                        href="${pageContext.request.contextPath}/Admin/pageuserinfo?id=${requestScope.get('admin').getId()}&&pageNum=1&&pageSize=10"> <i
                         class="icon-group"></i>用户信息审核
                 </a></li>
                 <li class="bg_lg span3"><a
-                        href="${pageContext.request.contextPath}/Admin/pagewtb?id=${requestScope.get('admin').getUserid()}&&pageNum=1&&pageSize=10"> <i
+                        href="${pageContext.request.contextPath}/Admin/pagewtb?id=${requestScope.get('admin').getId()}&&pageNum=1&&pageSize=10"> <i
                         class="icon-signal"></i>求购审核
                 </a></li>
                 <li class="bg_lo"><a
-                        href="${pageContext.request.contextPath}/Admin/pagewts?id=${requestScope.get('admin').getUserid()}&&pageNum=1&&pageSize=10"> <i
+                        href="${pageContext.request.contextPath}/Admin/pagewts?id=${requestScope.get('admin').getId()}&&pageNum=1&&pageSize=10"> <i
                         class="icon-th"></i>求卖审核
                 </a></li>
-                <li class="bg_ly"><a href="${pageContext.request.contextPath}/Admin/pagedeal?id=${requestScope.get('admin').getUserid()}&&pageNum=1&&pageSize=10">
+                <li class="bg_ly"><a href="${pageContext.request.contextPath}/Admin/pagedeal?id=${requestScope.get('admin').getId()}&&pageNum=1&&pageSize=10">
                     <i class="icon-inbox"></i>交易审核
                 </a></li>
             </ul>
