@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="GBK"%>
 <!--»ðËÙÇó¹º-->
 <section id="iwant" class="services-mf route">

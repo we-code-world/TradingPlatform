@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="GBK" %>
 <!DOCTYPE html>
 <html>
@@ -159,11 +158,11 @@
                                 <a href="${pageContext.request.contextPath}/Cart/show?userid=${requestScope.get('userid')}">
                                     <div class="header-btns-icon">
                                         <i class="fa fa-shopping-cart"></i>
-                                        <span class="qty" id="number">${user_cart.getGoodsnum()}</span>
+                                        <span class="qty" id="number">${user_cart.getGoodsNum()}</span>
                                     </div>
                                     <strong style="color: red">购物车:</strong>
                                     <br>
-                                    <span style="color: red" id="sum">￥${user_cart.getPricesum()}</span>
+                                    <span style="color: red" id="sum">￥${user_cart.getPriceSum()}</span>
                                 </a>
                             </li>
                             <!-- /Cart -->
@@ -302,15 +301,15 @@
                     int i = 0;
                 %>
                 <c:forEach var="Buy" items="${requestScope.get('buy_list')}">
-                    <div class="col-md-4" data-toggle="tooltip"title="和求购者聊天" onclick="chatseller(${Buy.getBuyerid()},${requestScope.get('userid')})">
+                    <div class="col-md-4" data-toggle="tooltip"title="和求购者聊天" onclick="chatseller(${Buy.getOwnerId()},${requestScope.get('userid')})">
                         <div class="service-box">
                             <div class="service-ico">
                                 <span class="ico-circle"><i class=<%=cls[i % 6]%>></i></span>
                             </div>
                             <div class="service-content">
-                                <h2 class="s-title">${Buy.getGoodsname()}</h2>
+                                <h2 class="s-title">${Buy.getName()}</h2>
                                 <p class="s-description text-center">
-                                        ${Buy.getData()}
+                                        ${Buy.getDescribe()}
                                 </p>
                             </div>
                         </div>
@@ -346,24 +345,24 @@
                                     <div class="product-label">
                                         <span>New</span>
                                     </div>
-                                    <a href="${pageContext.request.contextPath}/Sell/goodsdetail?id=${Sell.getGoodsid()}&userid=${requestScope.get('userid')}">
+                                    <a href="${pageContext.request.contextPath}/Sell/goodsdetail?id=${Sell.getId()}&userid=${requestScope.get('userid')}">
                                         <button class="main-btn quick-view"><i class="fa fa-eye"></i> 商品详情</button>
                                     </a>
-                                    <img src="${pageContext.request.contextPath}${Sell.getPictureurl()}" alt="">
+                                    <img src="${pageContext.request.contextPath}${Sell.getPictureUrl()}" alt="">
                                 </div>
                                 <div class="product-body">
                                     <h3 class="product-price">￥${Sell.getPrice()}</h3>
 
                                     <h2 class="product-name"><a
-                                            href="${pageContext.request.contextPath}/Sell/goodsdetail?id=${Sell.getGoodsid()}&userid=${requestScope.get('userid')}">${Sell.getGoodsname()}</a>
+                                            href="${pageContext.request.contextPath}/Sell/goodsdetail?id=${Sell.getId()}&userid=${requestScope.get('userid')}">${Sell.getName()}</a>
                                     </h2>
                                     <div class="product-btns">
                                         <button class="primary-btn add-to-cart"
-                                                onclick="change(${Sell.getGoodsid()},${requestScope.get('userid')})"><i
+                                                onclick="change(${Sell.getId()},${requestScope.get('userid')})"><i
                                                 class="fa fa-shopping-cart"></i> 加入购物车
                                         </button>
                                         &nbsp;&nbsp;&nbsp;
-                                        <button class="primary-btn add-to-cart" onclick="chatseller(${Sell.getSellerid()},${requestScope.get('userid')})">
+                                        <button class="primary-btn add-to-cart" onclick="chatseller(${Sell.getOwnerId()},${requestScope.get('userid')})">
                                             <i class="fa fa-commenting-o"></i> 联系卖家
                                         </button>
                                     </div>

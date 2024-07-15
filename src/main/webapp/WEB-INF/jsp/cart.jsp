@@ -1,11 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: ASUS
-  Date: 2020/9/23
-  Time: 21:01
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" pageEncoding="GBK"%>
 <!DOCTYPE html>
 
