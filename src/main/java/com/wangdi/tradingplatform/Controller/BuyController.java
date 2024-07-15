@@ -23,7 +23,7 @@ public class BuyController {
 
     @RequestMapping("/show")
     public String SHOW(Model model,int userid){
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("user_cart",user_cart);

@@ -4,7 +4,7 @@ import com.wangdi.tradingplatform.Entity.Message;
 
 import java.util.List;
 
-public interface MessageService {
+public interface ChatService {
     //保存一条消息
     int save(Message message);
     //删除一条消息

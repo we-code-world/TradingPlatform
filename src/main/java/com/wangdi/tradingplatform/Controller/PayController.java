@@ -33,7 +33,7 @@ public class PayController {
     @ResponseBody
     public Map<String,Object> check_out(int uid,double sum){
         Map<String,Object> map=new HashMap<String,Object>();
-        User user= manageService.findByID(uid);
+        User user= manageService.findUserByID(uid);
         if(user.getCharge()!=0&&user.getCharge()>=sum){
             map.put("result","ok");
         }else {
@@ -88,9 +88,9 @@ public class PayController {
             //out.println("trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount);
             userid=Integer.parseInt(out_trade_no.substring(0,5));
             double charge=Double.parseDouble(total_amount);
-            User user= manageService.findByID(userid);
+            User user= manageService.findUserByID(userid);
             user.setCharge(user.getCharge()+charge);
-            manageService.change(user);
+            manageService.changeUser(user);
             return "forward:/Personal/index?userid="+userid;
         } else {
             model.addAttribute("msg","signVerified_error");

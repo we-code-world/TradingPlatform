@@ -1,13 +1,11 @@
 package com.wangdi.tradingplatform;
 
 import com.wangdi.tradingplatform.Annotation.LogAnnotation;
-import com.wangdi.tradingplatform.DAO.AdministratorMapper;
 import com.wangdi.tradingplatform.DAO.TransactionMapper;
 import com.wangdi.tradingplatform.DAO.UserMapper;
 import com.wangdi.tradingplatform.Entity.Transaction;
 import com.wangdi.tradingplatform.Entity.User;
-import com.wangdi.tradingplatform.Service.AdministratorService;
-import com.wangdi.tradingplatform.Service.Impl.AdministratorServiceImpl;
+import com.wangdi.tradingplatform.Service.ManageService;
 import com.wangdi.tradingplatform.Tools.PasswordUtils;
 import com.wangdi.tradingplatform.Tools.TokenUtils;
 import org.junit.jupiter.api.Test;
@@ -25,7 +23,7 @@ class TradingPlatformApplicationTests {
     @Autowired
     private UserMapper userMapper;
     @Autowired
-    private AdministratorService administratorService;
+    private ManageService manageService;
 
     @Test
     public void testMapper(){
@@ -47,7 +45,7 @@ class TradingPlatformApplicationTests {
     @Test
     @LogAnnotation
     public void testTokenUtils(){
-        administratorService.delete(155);
+        manageService.deleteUser(155);
         User user = new User();
         user.setAccount("wangdi");
         user.setPassword("wangdi");

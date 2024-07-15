@@ -17,7 +17,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/Login")
 public class LoginController {
-    private final AdministratorService administratorService;
     private final ManageService manageService;
 
     @RequestMapping("/show")
@@ -27,7 +26,7 @@ public class LoginController {
 
     @RequestMapping("/allAdmin")
     public String list(Model model) {
-        List<Administrator> list = administratorService.findAll();
+        List<Administrator> list = manageService.findAllAdmins();
         model.addAttribute("list", list);
         return "allAdmin";
     }
@@ -35,7 +34,7 @@ public class LoginController {
     @ResponseBody
     public Map<String,Object> login_user(String Account, String password) {
         Map<String,Object> map=new HashMap<String,Object>();
-        User user= manageService.findByAccount(Account);
+        User user= manageService.findUserByAccount(Account);
         if(user!=null&&password.equals(user.getPassword())){
             map.put("role","user");
             map.put("userid",user.getId());
@@ -50,7 +49,7 @@ public class LoginController {
     @ResponseBody
     public Map<String,Object> login_admin(String Account,String password) {
         Map<String,Object> map=new HashMap<String,Object>();
-        Administrator admin=administratorService.findByAccount(Account);
+        Administrator admin=manageService.findAdminByAccount(Account);
         if(admin!=null&&password.equals(admin.getPassword())){
             map.put("role","admin");
             map.put("id",admin.getId());

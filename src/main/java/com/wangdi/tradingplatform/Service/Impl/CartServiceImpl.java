@@ -1,5 +1,6 @@
 package com.wangdi.tradingplatform.Service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wangdi.tradingplatform.DAO.CartMapper;
 import com.wangdi.tradingplatform.Entity.Cart;
@@ -17,7 +18,7 @@ public class CartServiceImpl implements CartService {
     }
     //根据用户ID查找购物车
     public Cart findByUser(int userid){
-        return cartMapper.selectOne(new QueryWrapper<Cart>().eq("userid",userid));
+        return cartMapper.selectOne(new LambdaQueryWrapper<Cart>().eq(Cart::getUserId,userid));
     }
     //根据购物车ID查找购物车
     public Cart findByID(int id){
@@ -29,6 +30,6 @@ public class CartServiceImpl implements CartService {
     }
     //根据一个用户的ID删除一个购物车
     public int delete(int userid){
-        return cartMapper.delete(new QueryWrapper<Cart>().eq("user_id",userid));
+        return cartMapper.delete(new LambdaQueryWrapper<Cart>().eq(Cart::getUserId,userid));
     }
 }

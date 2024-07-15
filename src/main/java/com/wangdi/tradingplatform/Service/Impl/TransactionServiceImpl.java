@@ -5,9 +5,11 @@ import com.wangdi.tradingplatform.DAO.TransactionMapper;
 import com.wangdi.tradingplatform.Entity.Transaction;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wangdi.tradingplatform.MessageQueue.Producer.TransactionProducer;
 import com.wangdi.tradingplatform.Service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,7 +17,9 @@ import java.util.List;
 @Service("TransactionServiceImpl")
 public class TransactionServiceImpl implements TransactionService {
     private final TransactionMapper transactionMapper;
+    private final TransactionProducer transactionProducer;
     //保存一个新的交易
+    @Transactional
     public int save(Transaction transaction){
         return transactionMapper.insert(transaction);
     }

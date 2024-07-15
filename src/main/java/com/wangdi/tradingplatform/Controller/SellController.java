@@ -30,7 +30,7 @@ public class SellController {
     private GoodsService goodsService;
     @RequestMapping("/show")
     public String show(int userid,Model model){
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("userid",userid);
         model.addAttribute("user_cart",user_cart);
@@ -40,7 +40,7 @@ public class SellController {
     public String show_index(Model model,int userid){
         List<Goods> list1;
         List<Goods> list2;
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         list1=goodsService.findSellsByUser(userid);
         list2=goodsService.findBuysByUser(userid);
         Cart user_cart = new Cart();
@@ -58,7 +58,7 @@ public class SellController {
     @RequestMapping("/goodsdetail")
     public String goodsdetail(int id,int userid,Model model){
         Goods good=goodsService.findByID(id);
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("goods",good);
         model.addAttribute("userid",userid);

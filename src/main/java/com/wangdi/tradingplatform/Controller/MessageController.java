@@ -2,7 +2,7 @@ package com.wangdi.tradingplatform.Controller;
 
 import com.wangdi.tradingplatform.Entity.Message;
 import com.wangdi.tradingplatform.Entity.User;
-import com.wangdi.tradingplatform.Service.MessageService;
+import com.wangdi.tradingplatform.Service.ChatService;
 import com.wangdi.tradingplatform.Service.ManageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/Message")
 public class MessageController {
-    private final MessageService messageService;
+    private final ChatService chatService;
     private final ManageService manageService;
     @RequestMapping("/chat")
     @ResponseBody
@@ -27,16 +27,16 @@ public class MessageController {
         Message M= new Message();
         M.setSenderId(userid);
         M.setReceiverId(id);
-        List<Message> list=messageService.findBothSide(M);
-        List<Message> list1=messageService.findByUser(userid);
-        User seller= manageService.findByID(id);
-        User mine= manageService.findByID(userid);
+        List<Message> list= chatService.findBothSide(M);
+        List<Message> list1= chatService.findByUser(userid);
+        User seller= manageService.findUserByID(id);
+        User mine= manageService.findUserByID(userid);
         List<User> ulist=new ArrayList<User>();
         try {
             ulist.add(seller);
             for (Message m:list1) {
-                User u1= manageService.findByID(m.getReceiverId());
-                User u2= manageService.findByID(m.getSenderId());
+                User u1= manageService.findUserByID(m.getReceiverId());
+                User u2= manageService.findUserByID(m.getSenderId());
                 if (u1!=null&&u1.getId()!=userid){
                     if (ulist.isEmpty())ulist.add(u1);
                     else {
@@ -72,12 +72,12 @@ public class MessageController {
     @ResponseBody
     public Map<String,Object> all(int userid){
         Map<String,Object> map=new HashMap<String,Object>();
-        List<Message> list1=messageService.findByUser(userid);
+        List<Message> list1= chatService.findByUser(userid);
         List<User> ulist=new ArrayList<User>();
         if(list1!=null){
             for (Message m:list1) {
-                User u1= manageService.findByID(m.getReceiverId());
-                User u2= manageService.findByID(m.getSenderId());
+                User u1= manageService.findUserByID(m.getReceiverId());
+                User u2= manageService.findUserByID(m.getSenderId());
                 if (u1!=null&&u1.getId()!=userid){
                     if (ulist.isEmpty())ulist.add(u1);
                     else {
@@ -115,7 +115,7 @@ public class MessageController {
             return map;
         }
         try {
-            if(messageService.send(id, userid, text)) map.put("result","ok");
+            if(chatService.send(id, userid, text)) map.put("result","ok");
             else map.put("result","error");
         }catch (Exception e){
             map.put("result","error");

@@ -3,7 +3,7 @@ package com.wangdi.tradingplatform.Service.Impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wangdi.tradingplatform.DAO.MessageMapper;
 import com.wangdi.tradingplatform.Entity.Message;
-import com.wangdi.tradingplatform.Service.MessageService;
+import com.wangdi.tradingplatform.Service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service("MessageServiceImpl")
-public class MessageServiceImpl implements MessageService {
+public class ChatServiceImpl implements ChatService {
     private final MessageMapper messageMapper;
     //保存一条消息
     public int save(Message message){

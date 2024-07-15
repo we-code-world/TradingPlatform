@@ -24,28 +24,27 @@ public class AdminController {
     private final LoginService loginService;
     private final GoodsService goodsService;
     private final TransactionService transactionService;
-    private final AdministratorService administratorService;
 
     @RequestMapping("/index")
     public String showIndexPage(Model model){
 //        Administrator administrator=loginService.getLoginAdmin("");
-        Administrator administrator = administratorService.findByID(1);
+        Administrator administrator = manageService.findAdminByID(1);
         System.out.println(administrator.getId());
         model.addAttribute("admin",administrator);
         return "administrator";
     }
     @RequestMapping("/userinfo")
     public String user(@RequestParam("id") int id, Model model){
-        Administrator administrator=administratorService.findByID(id);
-        List<User> list= manageService.findAll();
+        Administrator administrator=manageService.findAdminByID(id);
+        List<User> list= manageService.findAllUsers();
         model.addAttribute("admin",administrator);
         model.addAttribute("users",list);
         return "ad_info";
     }
     @RequestMapping("/pageuserinfo")
     public String pageuser(int id,int pageNum,int pageSize ,Model model){
-        Administrator administrator=administratorService.findByID(id);
-        PageInfo<User> list= manageService.pageAll(pageNum,pageSize);
+        Administrator administrator=manageService.findAdminByID(id);
+        PageInfo<User> list= manageService.pageAllUsers(pageNum,pageSize);
         //PageInfo<User> pagelist=userService.pageByChangeSign();
         model.addAttribute("admin",administrator);
         model.addAttribute("users",list);
@@ -54,7 +53,7 @@ public class AdminController {
     }
     @RequestMapping("/wtb")
     public String wtb(int id, Model model){
-        Administrator administrator=administratorService.findByID(id);
+        Administrator administrator=manageService.findAdminByID(id);
         List<Goods> list=goodsService.findAll();
         //PageInfo<WTB> pagelist=wtbService.pageAll();
         model.addAttribute("admin",administrator);
@@ -64,7 +63,7 @@ public class AdminController {
     }
     @RequestMapping("/pagewtb")
     public String pagewtb(int id,int pageNum,int pageSize , Model model){
-        Administrator administrator=administratorService.findByID(id);
+        Administrator administrator=manageService.findAdminByID(id);
         PageInfo<Goods> list=goodsService.pageAll(pageNum,pageSize);
         model.addAttribute("admin",administrator);
         model.addAttribute("wtbs",list);
@@ -73,7 +72,7 @@ public class AdminController {
     }
     @RequestMapping("/wts")
     public String wts(int id, Model model){
-        Administrator administrator=administratorService.findByID(id);
+        Administrator administrator=manageService.findAdminByID(id);
         Goods sell_goods = new Goods();
         List<Goods> list=goodsService.findByGoods(sell_goods);
         //PageInfo<WTS> pagelist=wtsService.pageAll();
@@ -84,7 +83,7 @@ public class AdminController {
     }
     @RequestMapping("/pagewts")
     public String pagewts(int id, int pageNum,int pageSize ,Model model){
-        Administrator administrator=administratorService.findByID(id);
+        Administrator administrator=manageService.findAdminByID(id);
         PageInfo<Goods> list=goodsService.pageAll(pageNum, pageSize);
         model.addAttribute("admin",administrator);
         model.addAttribute("wtss",list);
@@ -92,7 +91,7 @@ public class AdminController {
     }
     @RequestMapping("/deal")
     public String deal(int id, Model model){
-        Administrator administrator=administratorService.findByID(id);
+        Administrator administrator=manageService.findAdminByID(id);
         List<Transaction> list=transactionService.findAll();
         model.addAttribute("admin",administrator);
         model.addAttribute("deals",list);
@@ -100,7 +99,7 @@ public class AdminController {
     }
     @RequestMapping("/pagedeal")
     public String pagedeal(int id, int pageNum,int pageSize,Model model){
-        Administrator administrator=administratorService.findByID(id);
+        Administrator administrator=manageService.findAdminByID(id);
         PageInfo<Transaction> list=transactionService.pagefindAll(pageNum,pageSize);
         model.addAttribute("admin",administrator);
         model.addAttribute("deals",list);
@@ -138,7 +137,7 @@ public class AdminController {
     public Map<String,Object> getuser(int id){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            User user= manageService.findByID(id);
+            User user= manageService.findUserByID(id);
             map.put("user",user);
             map.put("result","ok");
         }catch (Exception e){
@@ -189,11 +188,11 @@ public class AdminController {
     public Map<String,Object> USERpass(int id){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            User user= manageService.findByID(id);
+            User user= manageService.findUserByID(id);
             // 消费消息队列中的待审核信息
             // User user1 = kafka.getMessage();
             // 保存用户信息到数据库
-            manageService.change(user);
+            manageService.changeUser(user);
             map.put("result","ok");
         }catch (Exception e){
             map.put("result","error");
@@ -240,8 +239,8 @@ public class AdminController {
     public Map<String,Object> userRefuse(int id){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            User user= manageService.findByID(id);
-            manageService.change(user);
+            User user= manageService.findUserByID(id);
+            manageService.changeUser(user);
             map.put("result","ok");
         }catch (Exception e){
             map.put("result","error");

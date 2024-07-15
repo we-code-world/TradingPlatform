@@ -21,7 +21,7 @@ public class UserController {
 
     @RequestMapping("/index")
     public String personal(Model model,int userid){
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("user_cart",user_cart);
@@ -29,7 +29,7 @@ public class UserController {
     }
     @RequestMapping("/show")
     public String personalpage(Model model,int userid){
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("user_cart",user_cart);
@@ -37,7 +37,7 @@ public class UserController {
     }
     @RequestMapping("/record")
     public String personalrecord(int userid,Model model){
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         List<Transaction> t_s=transactionService.findBySeller(userid);
         List<Transaction> t_b=transactionService.findByBuyer(userid);
@@ -61,7 +61,7 @@ public class UserController {
         goods.setOwnerId(userid);
         goods.setType(0);
         List<Goods> list_b=goodsService.findByGoods(goods);
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("Buys",list_b);
@@ -74,7 +74,7 @@ public class UserController {
         goods.setOwnerId(userid);
         goods.setType(0);
         List<Goods> list_s= goodsService.findByGoods(goods);
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
         model.addAttribute("Sells",list_s);
@@ -90,7 +90,7 @@ public class UserController {
     @RequestMapping("/update")
     public String updateINFO(User user,Model model){
         int id=user.getId();
-        User user1= manageService.findByID(id);
+        User user1= manageService.findUserByID(id);
         // 实现一下User的equals函数
         // 放入消息队列让管理员审核
         Cart user_cart=cartService.findByUser(user.getId());

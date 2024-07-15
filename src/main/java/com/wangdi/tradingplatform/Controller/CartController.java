@@ -108,9 +108,9 @@ public class CartController {
         Map<String,Object> map=new HashMap<String,Object>();
         Cart user_cart=cartService.findByID(cartid);
         int userid=user_cart.getUserId();
-        User user= manageService.findByID(userid);
+        User user= manageService.findUserByID(userid);
         user.setCharge(user.getCharge()-user_cart.getPriceSum());
-        manageService.change(user);
+        manageService.changeUser(user);
         int []goods=user_cart.showGoods();
         for (int good:goods) {
             Goods sell=goodsService.findByID(good);
