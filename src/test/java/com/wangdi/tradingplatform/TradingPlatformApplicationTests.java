@@ -30,6 +30,7 @@ class TradingPlatformApplicationTests {
         Transaction transaction = new Transaction();
         transaction.setBuyerId(3);
         transaction.setSellerId(5);
+
         transaction.setGoodsId(100009);
         transactionMapper.insert(transaction);
     }
