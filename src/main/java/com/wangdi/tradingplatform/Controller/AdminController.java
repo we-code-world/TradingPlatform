@@ -18,18 +18,15 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/Admin")
-@AccessLimit(maxCount = 10, seconds = 5)
+@AccessLimit(maxCount = 10, seconds = 5, role = "admin")
 public class AdminController {
     private final ManageService manageService;
-    private final LoginService loginService;
     private final GoodsService goodsService;
     private final TransactionService transactionService;
 
     @RequestMapping("/index")
     public String showIndexPage(Model model){
-//        Administrator administrator=loginService.getLoginAdmin("");
         Administrator administrator = manageService.findAdminByID(1);
-        System.out.println(administrator.getId());
         model.addAttribute("admin",administrator);
         return "administrator";
     }
@@ -174,7 +171,7 @@ public class AdminController {
     @RequestMapping("/updateWTSpass")
     @ResponseBody
     public Map<String,Object> wtspass(int id){
-        Map<String,Object> map=new HashMap<String,Object>();
+        Map<String,Object> map=new HashMap<>();
         try{
             // 审核
             map.put("result","ok");
@@ -186,7 +183,7 @@ public class AdminController {
     @RequestMapping("/updateUSERpass")
     @ResponseBody
     public Map<String,Object> USERpass(int id){
-        Map<String,Object> map=new HashMap<String,Object>();
+        Map<String,Object> map=new HashMap<>();
         try{
             User user= manageService.findUserByID(id);
             // 消费消息队列中的待审核信息
@@ -202,7 +199,7 @@ public class AdminController {
     @RequestMapping("/updateDEALpass")
     @ResponseBody
     public Map<String,Object> dealpass(int id){
-        Map<String,Object> map=new HashMap<String,Object>();
+        Map<String,Object> map=new HashMap<>();
         try{
             Transaction deal=transactionService.findByID(id);
             transactionService.updateByid(deal);
@@ -215,7 +212,7 @@ public class AdminController {
     @RequestMapping("/updateWTBRefuse")
     @ResponseBody
     public Map<String,Object> wtbRefuse(int id){
-        Map<String,Object> map=new HashMap<String,Object>();
+        Map<String,Object> map=new HashMap<>();
         try{
             map.put("result","ok");
         }catch (Exception e){
@@ -226,7 +223,7 @@ public class AdminController {
     @RequestMapping("/updateWTSRefuse")
     @ResponseBody
     public Map<String,Object> wtsRefuse(int id){
-        Map<String,Object> map=new HashMap<String,Object>();
+        Map<String,Object> map=new HashMap<>();
         try{
             map.put("result","ok");
         }catch (Exception e){
@@ -237,7 +234,7 @@ public class AdminController {
     @RequestMapping("/updateUSERRefuse")
     @ResponseBody
     public Map<String,Object> userRefuse(int id){
-        Map<String,Object> map=new HashMap<String,Object>();
+        Map<String,Object> map=new HashMap<>();
         try{
             User user= manageService.findUserByID(id);
             manageService.changeUser(user);
@@ -250,7 +247,7 @@ public class AdminController {
     @RequestMapping("/updateDEALRefuse")
     @ResponseBody
     public Map<String,Object> dealRefuse(int id){
-        Map<String,Object> map=new HashMap<String,Object>();
+        Map<String,Object> map=new HashMap<>();
         try{
             Transaction deal=transactionService.findByID(id);
             transactionService.updateByid(deal);

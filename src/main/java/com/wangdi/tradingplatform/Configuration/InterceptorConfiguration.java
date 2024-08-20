@@ -12,7 +12,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     private final AccessInterceptor accessInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(accessInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(accessInterceptor).addPathPatterns("/**").excludePathPatterns("/lib/**", "/img/**", "/js/**", "/css/**");
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 }

@@ -61,7 +61,7 @@ public class PasswordUtils {
     }
 
     public static boolean verifySaltPassword(String password, String md5) {
-        if(password == null || password.isEmpty()) return false;
+        if(password == null || password.isEmpty() || md5 == null || md5.length() != 48) return false;
         //先从MD5码中取出之前加的盐和加盐后生成的MD5码
         char[] cs1 = new char[32];
         char[] cs2 = new char[16];

@@ -10,8 +10,6 @@
     <!-- Favicons -->
     <link href="${pageContext.request.contextPath}/img/favicon.jpg" rel="icon">
     <link href="${pageContext.request.contextPath}/img/favicon.jpg" rel="apple-touch-icon">
-
-
     <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/img/favicon.jpg">
 
     <!-- CSS here -->
@@ -73,7 +71,7 @@
 
             <div class="form-input">
                 <label >ÕËºÅ</label>
-                <input  type="text" name="Account" id="acc" placeholder="ÕËºÅ"/>
+                <input  type="text" name="account" id="acc" placeholder="ÕËºÅ"/>
             </div>
             <br/>
 
@@ -100,7 +98,7 @@
                 <p id="log_btn" class="pt-0" style="text-align: center"><a class="btn btn px-4"  style="width: 200px;font-size: 25px;text-decoration: none">µÇÂ¼</a></p>
             </div>
 
-            <a href="${pageContext.request.contextPath}/Register/show" class="registration" style="text-align: center">Ã»ÓÐÕËºÅ£¿Çë×¢²á</a>
+            <a href="${pageContext.request.contextPath}/register/show" class="registration" style="text-align: center">Ã»ÓÐÕËºÅ£¿Çë×¢²á</a>
         </div>
     </form>
     <!-- /end login form -->
@@ -116,31 +114,23 @@
 
     toastr.options.positionClass = 'toast-center-center';
     $("#log_btn").click(function () {
-        if(document.form1.person.item("users").checked){
-            var url="${pageContext.request.contextPath}/Login/user";}
-        else {
-            var url="${pageContext.request.contextPath}/Login/admin";
-        }
+        role = "admin"
+        if(document.form1.person.item("users").checked) role = "user"
         $.post({
-            url: url,
-            data:{"Account":$("#acc").val(),"password":$("#pw").val()},
+            url: "${pageContext.request.contextPath}/login/do",
+            data:{"account":$("#acc").val(),"password":$("#pw").val(), "role": role},
             success: function(data){
-                var res=data.result;
-                if(res==="ok"){
+                if(data.result==="ok"){
                     toastr.success('µÇÂ¼³É¹¦');
-                    if(data.role==="user"){
-                        window.location.href="${pageContext.request.contextPath}/Sell/index?userid="+data.userid;
+                    if(role==="user"){
+                        window.location.href="${pageContext.request.contextPath}/goods/index?token="+data.token;
                     }else {
-                        window.location.href="${pageContext.request.contextPath}/Admin/index?id="+data.id;
+                        window.location.href="${pageContext.request.contextPath}/Admin/index?token="+data.token;
                     }
                 }else toastr.error("ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
             }
         });
     });
-
-
 </script>
-
-
 </body>
 </html>

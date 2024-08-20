@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 @Configuration
 @NoArgsConstructor
 public class CacheConfiguration {
-    public static final String PREFIX = "framework.cache.redis";
+    public static final String PREFIX = "cache.redis";
     private static final String prefixCharset = "UTF-8";
 
     @Bean

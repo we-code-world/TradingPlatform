@@ -70,7 +70,7 @@
                 <p id="reg_btn" class="pt-30" style="text-align: center"><a class="btn btn-primary btn js-scroll px-4" href="#" role="button" style="font-size: 25px;text-decoration: none">注册</a></p>
             </div>
             <!-- Forget Password -->
-            <a href="${pageContext.request.contextPath}/Login/show" class="registration" style="text-align: center">已有账号?请登录</a>
+            <a href="${pageContext.request.contextPath}/login/show" class="registration" style="text-align: center">已有账号?请登录</a>
         </div>
     </form>
     <!-- /end login form -->
@@ -89,20 +89,15 @@
 <script src="${pageContext.request.contextPath}/lib/jquery/jquery-3.3.1.min.js"></script>
 <script>
     function checkAccount(){
-        $.post({
-            url: "${pageContext.request.contextPath}/Register/user/check/account",
-            data:{"Account":$("#acc").val()},
-            success: function(data){
-                var res=data.result;
-                if(res.toString()==="ok"){
-                    $("#ac_info").css("color","green");
-                    $("#ac_info").html("");
-                }else {
-                    $("#ac_info").css("color","red");
-                    $("#ac_info").html("该账号已经被注册！");
-                }
-            }
-        })
+        account = $("#acc").val()
+        const pattern = /^[A-Za-z]+[A-Za-z0-9]*$/
+        if(pattern.test(account)){
+            $("#ac_info").css("color","green");
+            $("#ac_info").html("");
+        }else {
+            $("#ac_info").css("color","red");
+            $("#ac_info").html("账号不合法");
+        }
     }
     function checkPassword(){
         var pw1=$("#pw1").val();

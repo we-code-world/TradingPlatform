@@ -38,6 +38,7 @@ public class TokenUtils {
     }
 
     public static boolean verify(String token){
+        if(token == null) return false;
         try {
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256(TOKEN_SALT)).withIssuer(ISSUER).build();
             verifier.verify(token);

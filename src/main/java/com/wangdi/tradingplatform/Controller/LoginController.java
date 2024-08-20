@@ -15,29 +15,24 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/Login")
 public class LoginController {
-    private final ManageService manageService;
+    private final LoginService loginService;
 
-    @RequestMapping("/show")
+    @RequestMapping("/login/show")
     public String login(){
         return "login";
     }
-
-    @RequestMapping("/allAdmin")
-    public String list(Model model) {
-        List<Administrator> list = manageService.findAllAdmins();
-        model.addAttribute("list", list);
-        return "allAdmin";
+    @RequestMapping("/register/show")
+    public String page(){
+        return "register";
     }
-    @RequestMapping("/user")
+    @RequestMapping("/login/do")
     @ResponseBody
-    public Map<String,Object> login_user(String Account, String password) {
-        Map<String,Object> map=new HashMap<String,Object>();
-        User user= manageService.findUserByAccount(Account);
-        if(user!=null&&password.equals(user.getPassword())){
-            map.put("role","user");
-            map.put("userid",user.getId());
+    public Map<String,Object> login(String account, String password, String role) {
+        Map<String,Object> map=new HashMap<>();
+        String token=loginService.login(account, password, role);
+        if(token != null){
+            map.put("token", token);
             map.put("result","ok");
         }
         else{
@@ -45,17 +40,15 @@ public class LoginController {
         }
         return map;
     }
-    @RequestMapping("/admin")
+    @RequestMapping("/user/submit")
     @ResponseBody
-    public Map<String,Object> login_admin(String Account,String password) {
-        Map<String,Object> map=new HashMap<String,Object>();
-        Administrator admin=manageService.findAdminByAccount(Account);
-        if(admin!=null&&password.equals(admin.getPassword())){
-            map.put("role","admin");
-            map.put("id",admin.getId());
+    public Map<String,Object> register(String pw_info,User user){
+        Map<String,Object> map=new HashMap<>();
+        String token;
+        if(pw_info.equals("ok") && (token = loginService.register(user)) != null){
+            map.put("token", token);
             map.put("result","ok");
-        }
-        else {
+        }else {
             map.put("result","error");
         }
         return map;

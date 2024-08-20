@@ -1,5 +1,6 @@
 package com.wangdi.tradingplatform;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wangdi.tradingplatform.Annotation.LogAnnotation;
 import com.wangdi.tradingplatform.DAO.TransactionMapper;
 import com.wangdi.tradingplatform.DAO.UserMapper;
@@ -9,10 +10,13 @@ import com.wangdi.tradingplatform.Service.ManageService;
 import com.wangdi.tradingplatform.Tools.PasswordUtils;
 import com.wangdi.tradingplatform.Tools.TokenUtils;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RBloomFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 class TradingPlatformApplicationTests {
@@ -24,6 +28,8 @@ class TradingPlatformApplicationTests {
     private UserMapper userMapper;
     @Autowired
     private ManageService manageService;
+    @Autowired
+    private RBloomFilter<String> userCacheBloomFilter;
 
     @Test
     public void testMapper(){
@@ -60,6 +66,15 @@ class TradingPlatformApplicationTests {
     public void testPasswordUtils(){
         String passwd = PasswordUtils.generateSaltPassword("");
         System.out.println(passwd.length());
+    }
+
+    @Test
+    public void resetPassword(){
+        List<User> userList = userMapper.selectList(new QueryWrapper<>());
+        for (User u:userList){
+            System.out.println(u.getAccount());
+            userCacheBloomFilter.add(u.getAccount());
+        }
     }
 
 }

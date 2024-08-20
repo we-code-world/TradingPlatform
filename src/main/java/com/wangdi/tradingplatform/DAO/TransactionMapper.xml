@@ -6,7 +6,7 @@
 <mapper namespace="com.wangdi.tradingplatform.DAO.TransactionMapper">
     <!--匹配符合要求的交易列表-->
     <select id="matching" resultType="com.wangdi.tradingplatform.Entity.Transaction" parameterType="com.wangdi.tradingplatform.Entity.Transaction">
-        select * from T_transaction
+        select id, buyer_id, seller_id, goods_id, status, create_time, update_time, end_time from T_transaction
         <where>
             <if test="id != 0">
                 id = #{id}

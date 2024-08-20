@@ -48,15 +48,15 @@
                     <a class="nav-link js-scroll active" href="${pageContext.request.contextPath}/" style="font-size: 20px">首页</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Login/show" style="font-size: 20px">发布求购</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/login/show" style="font-size: 20px">发布求购</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Login/show" style="font-size: 20px">发布二手</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/login/show" style="font-size: 20px">发布二手</a>
                 </li>
 
-                <li class="button-header margin-left " ><a href="${pageContext.request.contextPath}/Register/show" class="btn">注册</a></li>
+                <li class="button-header margin-left " ><a href="${pageContext.request.contextPath}/register/show" class="btn">注册</a></li>
                 &nbsp;&nbsp;
-                <li class="button-header"><a href="${pageContext.request.contextPath}/Login/show" class="btn">登录</a></li>
+                <li class="button-header"><a href="${pageContext.request.contextPath}/login/show" class="btn">登录</a></li>
             </ul>
         </div>
     </div>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="service-content">
                         <h2 class="s-title">有钱</h2>
-                        <p class="s-description text-center" href="${pageContext.request.contextPath}/Login/show">
+                        <p class="s-description text-center" href="${pageContext.request.contextPath}/login/show">
                             想要有钱	想要有钱想要有钱想 要有钱想要有钱想要有钱想要有钱想 想要有钱想要有钱想要有钱
                         </p>
                     </div>
@@ -155,7 +155,7 @@
                     </div>
                     <div class="service-content">
                         <h2 class="s-title">有钱</h2>
-                        <p class="s-description text-center" href="${pageContext.request.contextPath}/Login/show">
+                        <p class="s-description text-center" href="${pageContext.request.contextPath}/login/show">
                             想要有钱	想要有钱想要有钱想 要有钱想要有钱想要有钱想要有钱想 想要有钱想要有钱想要有钱
                         </p>
                     </div>
@@ -168,7 +168,7 @@
                     </div>
                     <div class="service-content">
                         <h2 class="s-title">有钱</h2>
-                        <p class="s-description text-center" href="${pageContext.request.contextPath}/Login/show">
+                        <p class="s-description text-center" href="${pageContext.request.contextPath}/login/show">
                             想要有钱	想要有钱想要有钱想 要有钱想要有钱想要有钱想要有钱想 想要有钱想要有钱想要有钱
                         </p>
                     </div>
@@ -204,17 +204,17 @@
                             <div class="product-label">
                                 <span>New</span>
                             </div>
-                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-eye"></i> 商品详情</button>
+                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-eye"></i> 商品详情</button>
                             <img src="${pageContext.request.contextPath}/img/product06.jpg" alt="">
                         </div>
                         <div class="product-body">
                             <h3 class="product-price">￥32.50</h3>
 
-                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/Login/show">商品名称</a></h2>
+                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/login/show">商品名称</a></h2>
                             <div class="product-btns">
-                                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart" href="${pageContext.request.contextPath}/Login/show"></i> 加入购物车</button>
+                                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart" href="${pageContext.request.contextPath}/login/show"></i> 加入购物车</button>
                                 &nbsp;&nbsp;&nbsp;
-                                <button class="primary-btn add-to-cart"><i class="fa fa-commenting-o" href="${pageContext.request.contextPath}/Login/show"></i> 联系卖家</button>
+                                <button class="primary-btn add-to-cart"><i class="fa fa-commenting-o" href="${pageContext.request.contextPath}/login/show"></i> 联系卖家</button>
                             </div>
                         </div>
                     </div>
@@ -232,11 +232,11 @@
                         <div class="product-body">
                             <h3 class="product-price">￥32.50  </h3>
 
-                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/Login/show">商品名称</a></h2>
+                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/login/show">商品名称</a></h2>
                             <div class="product-btns">
-                                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart" href="${pageContext.request.contextPath}/Login/show"></i> 加入购物车</button>
+                                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart" href="${pageContext.request.contextPath}/login/show"></i> 加入购物车</button>
                                 &nbsp;&nbsp;&nbsp;
-                                <button class="primary-btn add-to-cart"><i class="fa fa-commenting-o" href="${pageContext.request.contextPath}/Login/show"></i> 联系卖家</button>
+                                <button class="primary-btn add-to-cart"><i class="fa fa-commenting-o" href="${pageContext.request.contextPath}/login/show"></i> 联系卖家</button>
                             </div>
                         </div>
                     </div>
@@ -248,17 +248,17 @@
                             <div class="product-label">
                                 <span>New</span>
                             </div>
-                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-eye"></i> 商品详情</button>
+                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-eye"></i> 商品详情</button>
                             <img src="${pageContext.request.contextPath}/img/product04.jpg" alt="">
                         </div>
                         <div class="product-body">
                             <h3 class="product-price">￥32.50</h3>
 
-                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/Login/show">商品名称</a></h2>
+                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/login/show">商品名称</a></h2>
                             <div class="product-btns">
-                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
+                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                                 &nbsp;&nbsp;&nbsp;
-                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-commenting-o"></i> 联系卖家</button>
+                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-commenting-o"></i> 联系卖家</button>
                             </div>
                         </div>
                     </div>
@@ -270,17 +270,17 @@
                             <div class="product-label">
                                 <span>New</span>
                             </div>
-                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-eye"></i> 商品详情</button>
+                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-eye"></i> 商品详情</button>
                             <img src="${pageContext.request.contextPath}/img/product03.jpg" alt="">
                         </div>
                         <div class="product-body">
                             <h3 class="product-price">￥32.50  </h3>
 
-                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/Login/show">商品名称</a></h2>
+                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/login/show">商品名称</a></h2>
                             <div class="product-btns">
-                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
+                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                                 &nbsp;&nbsp;&nbsp;
-                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-commenting-o"></i> 联系卖家</button>
+                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-commenting-o"></i> 联系卖家</button>
                             </div>
                         </div>
                     </div>
@@ -292,17 +292,17 @@
                             <div class="product-label">
                                 <span>New</span>
                             </div>
-                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-eye"></i> 商品详情</button>
+                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-eye"></i> 商品详情</button>
                             <img src="${pageContext.request.contextPath}/img/product03.jpg" alt="">
                         </div>
                         <div class="product-body">
                             <h3 class="product-price">￥32.50  </h3>
 
-                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/Login/show">商品名称</a></h2>
+                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/login/show">商品名称</a></h2>
                             <div class="product-btns">
-                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
+                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                                 &nbsp;&nbsp;&nbsp;
-                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-commenting-o"></i> 联系卖家</button>
+                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-commenting-o"></i> 联系卖家</button>
                             </div>
                         </div>
                     </div>
@@ -314,17 +314,17 @@
                             <div class="product-label">
                                 <span>New</span>
                             </div>
-                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-eye"></i> 商品详情</button>
+                            <button class="main-btn quick-view" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-eye"></i> 商品详情</button>
                             <img src="${pageContext.request.contextPath}/img/product06.jpg" alt="">
                         </div>
                         <div class="product-body">
                             <h3 class="product-price">￥32.50</h3>
 
-                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/Login/show">商品名称</a></h2>
+                            <h2 class="product-name"><a href="${pageContext.request.contextPath}/login/show">商品名称</a></h2>
                             <div class="product-btns">
-                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
+                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                                 &nbsp;&nbsp;&nbsp;
-                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/Login/show"><i class="fa fa-commenting-o"></i> 联系卖家</button>
+                                <button class="primary-btn add-to-cart" href="${pageContext.request.contextPath}/login/show"><i class="fa fa-commenting-o"></i> 联系卖家</button>
                             </div>
                         </div>
                     </div>

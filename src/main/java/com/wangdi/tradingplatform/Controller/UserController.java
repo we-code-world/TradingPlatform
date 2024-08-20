@@ -19,14 +19,6 @@ public class UserController {
     private final GoodsService goodsService;
     private final CartService cartService;
 
-    @RequestMapping("/index")
-    public String personal(Model model,int userid){
-        User user= manageService.findUserByID(userid);
-        Cart user_cart=cartService.findByUser(user.getId());
-        model.addAttribute("user",user);
-        model.addAttribute("user_cart",user_cart);
-        return "personal";
-    }
     @RequestMapping("/show")
     public String personalpage(Model model,int userid){
         User user= manageService.findUserByID(userid);

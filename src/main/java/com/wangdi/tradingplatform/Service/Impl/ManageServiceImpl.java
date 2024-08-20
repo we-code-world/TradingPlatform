@@ -58,10 +58,6 @@ public class ManageServiceImpl implements ManageService {
     public User findUserByID(int id){
         return userMapper.selectById(id);
     }
-    //通过账号查找用户
-    public User findUserByAccount(String Account){
-        return userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getAccount, Account));
-    }
     //查找所有用户
     public List<User> findAllUsers(){
         return userMapper.selectList(null);
@@ -72,15 +68,5 @@ public class ManageServiceImpl implements ManageService {
         PageHelper.startPage(pageNum,pageSize);
         List<User> list = userMapper.selectList(null);
         return new PageInfo<User>(list);
-    }
-
-    @Override
-    public boolean hasAccount(String account) {
-        return false;
-    }
-
-    @Override
-    public boolean register(User user) {
-        return false;
     }
 }
