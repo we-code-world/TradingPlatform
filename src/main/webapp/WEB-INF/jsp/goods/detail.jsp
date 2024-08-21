@@ -81,22 +81,22 @@
 <nav class="navbar navbar-b navbar-expand-md  navbar-trans" style="background-color: #955e46" id="mainNav">
     <div class="container" >
         <a class="navbar-brand js-scroll" href="#page-top">
-            <img src="${pageContext.request.contextPath}/img/favicon.jpg" style="width:50px">
+            <img src="${pageContext.request.contextPath}/img/favicon.jpg" style="width:50px" alt="....">
             南理工闲鱼
         </a>
         <div class="navbar-collapse justify-content-end collapse" id="navbarDefault" style="">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Sell/index/?userid=${requestScope.get('userid')}" style="font-size: 20px">首页</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/goods/index" style="font-size: 20px">首页</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Buy/show?userid=${requestScope.get('userid')}" style="font-size: 20px">发布求购</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/goods/need/show" style="font-size: 20px">发布求购</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Sell/show?userid=${requestScope.get('userid')}" style="font-size: 20px">发布二手</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/goods/show" style="font-size: 20px">发布二手</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Personal/index?userid=${requestScope.get('userid')}" style="font-size: 20px">个人主页</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/personal/index" style="font-size: 20px">个人主页</a>
                 </li>
 
 
@@ -109,16 +109,16 @@
 
 
                         <!-- Cart -->
-                        <c var="user_cart" value="${requestScope.get('user_cart')}">
+                        <c var="cart" value="${requestScope.get('user_cart')}">
                             <li class="header-cart">
-                                <a href="${pageContext.request.contextPath}/Cart/show?userid=${requestScope.get('userid')}">
+                                <a href="${pageContext.request.contextPath}/cart/show">
                                     <div class="header-btns-icon">
                                         <i class="fa fa-shopping-cart"></i>
-                                        <span class="qty" id="number">${user_cart.getGoodsnum()}</span>
+                                        <span class="qty" id="number">${cart.getGoodsNum()}</span>
                                     </div>
                                     <strong style="color: red">购物车:</strong>
                                     <br>
-                                    <span style="color: red" id="sum">￥${user_cart.getPricesum()}</span>
+                                    <span style="color: red" id="sum">￥${cart.getPriceSum()}</span>
                                 </a>
                             </li>
                             <!-- /Cart -->
@@ -134,12 +134,12 @@
 </nav>
 <script src="${pageContext.request.contextPath}/lib/jquery/jquery-3.3.1.min.js"></script>
 <script>
-    function change(gid,uid){
+    function change(gid){
         $.ajax({
-            url: "${pageContext.request.contextPath}/Cart/add",
+            url: "${pageContext.request.contextPath}/cart/add",
             cache: false,
             type:'GET',
-            data:{"goodsid":gid,"userid":uid},
+            data:{"goods_id":gid},
             dataType:"json",
             success: function(data){
                 swal({
@@ -166,24 +166,24 @@
         <div class="row">
             <div class="col-xs-6 col-md-6">
                 <a href="#" class="thumbnail ">
-                    <img class="double-border" src="${pageContext.request.contextPath}${requestScope.get('goods').getPictureurl()}"  width="560px" height="560px"  alt="${requestScope.goods.getGoodsname()}" />
+                    <img class="double-border" src="${pageContext.request.contextPath}${requestScope.get('goods').getPictureUrl()}"  width="560px" height="560px"  alt="${requestScope.goods.getGoodsname()}" />
                 </a>
             </div>
             <div class="col-xs-6 col-md-6" >
                 <div class="panel panel-default" style="height: 560px ">
                     <div class="panel-body"  >
-                        <h3>产品名称:${requestScope.get('goods').getGoodsname()}</h3>
+                        <h3>产品名称:${requestScope.get('goods').getName()}</h3>
                         <div style="margin-left: 10px; margin-top:50px;">
 
                             <p style="background:url(${pageContext.request.contextPath}/img/bgprice.png);color: #999;font-size: 24px;text-align: left;background-color: #e9e9e9;">市场价格:&nbsp;&nbsp;&nbsp;<span class="text-danger" style="font-size: 45px;color: #FF0036;font-weight: bolder;">${requestScope.get('goods').getPrice()}</span><span class="glyphicon glyphicon-yen"></span></p>
 
                             <p style="font-weight:900">详细介绍:</p>
-                            <p style="height: 18px;line-height: 18px;color: #666;font-weight: 700">${requestScope.get('goods').getData()}</p>
+                            <p style="height: 18px;line-height: 18px;color: #666;font-weight: 700">${requestScope.get('goods').getDescribe()}</p>
                             <br>
                             <br>
                             <br>
-                            <button class="btn btn-warning" onclick="change(${requestScope.get('goods').getGoodsid()},${requestScope.get('userid')})">加入购物车&nbsp;&nbsp;&nbsp;<span class="fa fa-shopping-cart"></span></button>&nbsp;&nbsp;&nbsp;
-                            <button  style="margin-left: 50px" class="btn btn-danger"><a onclick="chatseller(${requestScope.get('goods').getSellerid()},${requestScope.get('userid')})">联系卖家&nbsp;&nbsp;</a><span class="fa fa-comment"></span></button>
+                            <button class="btn btn-warning" onclick="change(${requestScope.get('goods').getGoodsid()})">加入购物车&nbsp;&nbsp;&nbsp;<span class="fa fa-shopping-cart"></span></button>&nbsp;&nbsp;&nbsp;
+                            <button  style="margin-left: 50px" class="btn btn-danger"><a onclick="chatseller(${requestScope.get('goods').getOwnerId()})">联系卖家&nbsp;&nbsp;</a><span class="fa fa-comment"></span></button>
                         </div>
                     </div>
                 </div>
@@ -267,17 +267,17 @@
     </div>
 </div>
 <script>
-    function chatseller(sid, uid) {
-        chatAll(uid);
-        chatid(sid, uid)
+    function chatseller(sid) {
+        chatAll();
+        chatid(sid)
     }
 
-    function chatid(sid, uid) {
-        selectu(sid, uid);
+    function chatid(sid) {
+        selectu(sid);
         $.ajax({
-            url: '${pageContext.request.contextPath}/Message/chat',
+            url: '${pageContext.request.contextPath}/message/chat',
             type: 'POST',
-            data: {"id": sid, "userid": uid},
+            data: {"id": sid},
             success: function (data) {
                 console.log(data);
                 var html="";
@@ -311,9 +311,8 @@
 
     function chatAll(uid) {
         $.ajax({
-            url: '${pageContext.request.contextPath}/Message/all',
+            url: '${pageContext.request.contextPath}/message/all',
             type: 'POST',
-            data: {"userid": uid},
             success: function (data) {
                 console.log(data);
                 var html="";
@@ -330,12 +329,12 @@
 
     function sendContext(sid,uid) {
         $.ajax({
-            url:'${pageContext.request.contextPath}/Message/send',
+            url:'${pageContext.request.contextPath}/message/send',
             type:'POST',
-            data:{"id": sid, "userid": uid,"text":$("#Textarea").val()},
+            data:{"id": sid,"text":$("#Textarea").val()},
             success:function (data) {
                 if (data.result==="ok"){
-                    chatseller(sid,uid);
+                    chatseller(sid);
                 }else toastr.error("消息发送失败！")
             },
             error:function () {
@@ -346,7 +345,7 @@
     function selectu(sid, uid) {
         show="";
         show+="<div class=\"form-group\"><textarea class=\"form-control\" id=\"Textarea\" rows=\"3\"></textarea></div>";
-        show+="<button type=\"submit\" class=\"btn btn-primary pull-right\" id=\"sendmsg\" onclick='sendContext("+sid+","+uid+")'>发送</button>";
+        show+="<button type=\"submit\" class=\"btn btn-primary pull-right\" id=\"sendmsg\" onclick='sendContext("+sid+")'>发送</button>";
         console.log(show)
         $("#text_area").html(show);
     }

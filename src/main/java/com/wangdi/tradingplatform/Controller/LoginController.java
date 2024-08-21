@@ -3,6 +3,8 @@ package com.wangdi.tradingplatform.Controller;
 import com.wangdi.tradingplatform.Annotation.AccessLimit;
 import com.wangdi.tradingplatform.Entity.*;
 import com.wangdi.tradingplatform.Service.*;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,18 +22,20 @@ public class LoginController {
 
     @RequestMapping("/login/show")
     public String login(){
-        return "login";
+        return "login/login";
     }
     @RequestMapping("/register/show")
     public String page(){
-        return "register";
+        return "login/register";
     }
     @RequestMapping("/login/do")
     @ResponseBody
-    public Map<String,Object> login(String account, String password, String role) {
+    public Map<String,Object> login(HttpServletResponse response, String account, String password, String role) {
         Map<String,Object> map=new HashMap<>();
         String token=loginService.login(account, password, role);
         if(token != null){
+            Cookie cookie = new Cookie("token", token);
+            response.addCookie(cookie);
             map.put("token", token);
             map.put("result","ok");
         }
@@ -42,10 +46,12 @@ public class LoginController {
     }
     @RequestMapping("/user/submit")
     @ResponseBody
-    public Map<String,Object> register(String pw_info,User user){
+    public Map<String,Object> register(HttpServletResponse response, String pw_info, User user){
         Map<String,Object> map=new HashMap<>();
         String token;
         if(pw_info.equals("ok") && (token = loginService.register(user)) != null){
+            Cookie cookie = new Cookie("token", token);
+            response.addCookie(cookie);
             map.put("token", token);
             map.put("result","ok");
         }else {

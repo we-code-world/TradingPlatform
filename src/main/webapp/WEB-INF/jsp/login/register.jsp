@@ -116,11 +116,10 @@
 
     $("#reg_btn").click(function sub(){
         $.post({
-            url: "${pageContext.request.contextPath}/Register/user/submit",
-            data:{"pw_info":$("#pw_info").val(),"Account":$("#acc").val(),"password":$("#pw1").val(),"Email":$("#em").val(),"Telephone":$("#tel").val(),"Address":$("#ad").val()},
+            url: "${pageContext.request.contextPath}/user/submit",
+            data:{"pw_info":$("#pw_info").val(),"account":$("#acc").val(),"password":$("#pw1").val(),"email":$("#em").val(),"telephone":$("#tel").val(),"address":$("#ad").val()},
             success: function(data){
-                var res=data.result;
-                if(res.toString()==="ok"){
+                if(data.result==="ok"){
                     swal({
                         title : "×¢²á³É¹¦!",
                         type : "success",
@@ -130,7 +129,7 @@
                     },function(isConfirm){
                         if (isConfirm) {
                             location.reload();
-                            window.location.href="${pageContext.request.contextPath}/Login/show";
+                            window.location.href="${pageContext.request.contextPath}/goods/index?token=" + data.token;
                         }
                     });
                 }else {

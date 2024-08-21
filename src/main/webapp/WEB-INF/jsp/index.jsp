@@ -131,22 +131,22 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link js-scroll"
-                       href="${pageContext.request.contextPath}/Sell/index?userid=${requestScope.get('userid')}"
+                       href="${pageContext.request.contextPath}/goods/index"
                        style="font-size: 20px">首页</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll"
-                       href="${pageContext.request.contextPath}/Buy/show?userid=${requestScope.get('userid')}"
+                       href="${pageContext.request.contextPath}/goods/need/show"
                        style="font-size: 20px">发布求购</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll"
-                       href="${pageContext.request.contextPath}/Sell/show?userid=${requestScope.get('userid')}"
+                       href="${pageContext.request.contextPath}/goods/show"
                        style="font-size: 20px">发布二手</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll"
-                       href="${pageContext.request.contextPath}/Personal/index?userid=${requestScope.get('userid')}"
+                       href="${pageContext.request.contextPath}/personal/index"
                        style="font-size: 20px">个人主页</a>
                 </li>
 
@@ -155,7 +155,7 @@
                         <!-- Cart -->
                         <c var="user_cart" value="${requestScope.get('user_cart')}">
                             <li class="header-cart">
-                                <a href="${pageContext.request.contextPath}/Cart/show?userid=${requestScope.get('userid')}">
+                                <a href="${pageContext.request.contextPath}/cart/show">
                                     <div class="header-btns-icon">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span class="qty" id="number">${user_cart.getGoodsNum()}</span>
@@ -170,7 +170,7 @@
                     </ul>
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link " href="${pageContext.request.contextPath}/static_index.jsp"
+                    <a class="nav-link " href="${pageContext.request.contextPath}/"
                        style="padding-left: 13px;font-size:15px">退出登录</a>
                 </li>
                 <li style="">
@@ -182,12 +182,12 @@
 </nav>
 <script src="${pageContext.request.contextPath}/lib/jquery/jquery-3.3.1.min.js"></script>
 <script>
-    function change(gid, uid) {
+    function change(gid) {
         $.ajax({
-            url: "${pageContext.request.contextPath}/Cart/add",
+            url: "${pageContext.request.contextPath}/cart/add",
             cache: false,
             type: 'GET',
-            data: {"goodsid": gid, "userid": uid},
+            data: {"goods_id": gid},
             dataType: "json",
             success: function (data) {
                 swal({
@@ -474,7 +474,7 @@
     function chatid(sid, uid) {
         selectu(sid, uid);
         $.ajax({
-            url: '${pageContext.request.contextPath}/Message/chat',
+            url: '${pageContext.request.contextPath}/message/chat',
             type: 'POST',
             data: {"id": sid, "userid": uid},
             success: function (data) {
@@ -557,14 +557,14 @@
             }
         })
     }
-    function serchByclass(cid) {
+    function searchByClass(cid) {
         if (cid===0){
             location.reload();
         }else {
             $.ajax({
-                url:'${pageContext.request.contextPath}/Sell/classes',
+                url:'${pageContext.request.contextPath}/goods/classes',
                 type:'POST',
-                data:{"catelogId":cid,"userid":${requestScope.get('userid')}},
+                data:{"catalogId":cid},
                 success:function (data) {
                     $("#goods").html(data);
                 }

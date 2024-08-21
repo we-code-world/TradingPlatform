@@ -1,5 +1,6 @@
 package com.wangdi.tradingplatform.Controller;
 
+import com.wangdi.tradingplatform.Annotation.AccessLimit;
 import com.wangdi.tradingplatform.Entity.Administrator;
 import com.wangdi.tradingplatform.Entity.Cart;
 import com.wangdi.tradingplatform.Entity.User;
@@ -20,18 +21,19 @@ public class IndexController {
     public String index(){
         return "static_index";
     }
+    @AccessLimit()
     @RequestMapping("/admin")
     public String showIndexPage(Model model, String token){
         Administrator administrator = loginService.getAdmin(token);
         model.addAttribute("admin", administrator);
         return "administrator";
     }
+    @AccessLimit()
     @RequestMapping("/index")
     public String personal(Model model, String token){
         User user= loginService.getUser(token);
-        Cart user_cart=cartService.findByUser(user.getId());
-        model.addAttribute("user",user);
-        model.addAttribute("user_cart",user_cart);
+        model.addAttribute("user", user);
+        model.addAttribute("user_cart", cartService.getByUser(user.getId()));
         return "personal";
     }
 }

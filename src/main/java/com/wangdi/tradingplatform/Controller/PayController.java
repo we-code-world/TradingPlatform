@@ -1,6 +1,7 @@
 package com.wangdi.tradingplatform.Controller;
 
 import com.wangdi.tradingplatform.Entity.User;
+import com.wangdi.tradingplatform.Service.LoginService;
 import com.wangdi.tradingplatform.Service.ManageService;
 import com.wangdi.tradingplatform.Tools.AlipayConfig;
 import com.wangdi.tradingplatform.Tools.CommonUtils;
@@ -9,6 +10,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.*;
 import com.alipay.api.request.*;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -25,15 +27,18 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/Pay")
+@RequestMapping("/pay")
 public class PayController {
-    private final ManageService manageService;
+    private final LoginService loginService;
 
     @RequestMapping("/checkout")
     @ResponseBody
-    public Map<String,Object> check_out(int uid,double sum){
+    public Map<String,Object> check_out(HttpServletRequest request, double sum){
         Map<String,Object> map=new HashMap<String,Object>();
-        User user= manageService.findUserByID(uid);
+        Cookie[] cookies = request.getCookies();
+        String token = null;
+        for (Cookie cookie: cookies) if ("token".equals(cookie.getName())) token = cookie.getValue();
+        User user = loginService.getUser(token);
         if(user.getCharge()!=0&&user.getCharge()>=sum){
             map.put("result","ok");
         }else {
@@ -54,6 +59,10 @@ public class PayController {
     }
     @RequestMapping("/return")
     public String returnUrl(HttpServletRequest request, Model model) throws Exception {
+        Cookie[] cookies = request.getCookies();
+        String token = null;
+        for (Cookie cookie: cookies) if ("token".equals(cookie.getName())) token = cookie.getValue();
+        User user = loginService.getUser(token);
         //PrintWriter out = response.getWriter();
         //获取支付宝GET过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
@@ -88,9 +97,6 @@ public class PayController {
             //out.println("trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount);
             userid=Integer.parseInt(out_trade_no.substring(0,5));
             double charge=Double.parseDouble(total_amount);
-            User user= manageService.findUserByID(userid);
-            user.setCharge(user.getCharge()+charge);
-            manageService.changeUser(user);
             return "forward:/Personal/index?userid="+userid;
         } else {
             model.addAttribute("msg","signVerified_error");

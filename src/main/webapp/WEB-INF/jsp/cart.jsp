@@ -49,16 +49,16 @@
         <div class="navbar-collapse justify-content-end collapse" id="navbarDefault">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Sell/index?userid=${requestScope.get('userid')}" style="font-size: 20px">首页</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/sell/index" style="font-size: 20px">首页</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Buy/show?userid=${requestScope.get('userid')}" style="font-size: 20px">发布求购</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Buy/show" style="font-size: 20px">发布求购</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Sell/show?userid=${requestScope.get('userid')}" style="font-size: 20px">发布商品</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Sell/show" style="font-size: 20px">发布商品</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Personal/index?userid=${requestScope.get('userid')}" style="font-size: 20px">个人主页</a>
+                    <a class="nav-link js-scroll" href="${pageContext.request.contextPath}/Personal/index" style="font-size: 20px">个人主页</a>
                 </li>
             </ul>
         </div>
@@ -107,7 +107,7 @@
 
             <br><br>
             <div style="margin-bottom: 20px;margin-left: 900px">
-            商品金额总计：<span id="total" class="text-danger" ><b>￥${requestScope.get('user_cart').getPricesum()}&nbsp</b></span>
+            商品金额总计：<span id="total" class="text-danger" ><b>￥${requestScope.get('user_cart').getPriceSum()}&nbsp</b></span>
         </div>
     </div>
 </div>
@@ -155,7 +155,7 @@
 <script>
     function delone(gid) {
         $.ajax({
-            url:'${pageContext.request.contextPath}/Cart/delete/one',
+            url:'${pageContext.request.contextPath}/cart/delete/one',
             type:'POST',
             data:{"id":${requestScope.get('userid')},"gid":gid},
             success:function (data) {
@@ -177,7 +177,7 @@
     }
     function delall() {
         $.ajax({
-            url:'${pageContext.request.contextPath}/Cart/delete/all',
+            url:'${pageContext.request.contextPath}/cart/delete/all',
             type:'POST',
             data:{"id":${requestScope.get('userid')}},
             success:function (data) {
@@ -201,7 +201,7 @@
 
     function checkout() {
         $.ajax({
-            url:'${pageContext.request.contextPath}/Pay/checkout',
+            url:'${pageContext.request.contextPath}/pay/checkout',
             type:'POST',
             data:{"uid":${requestScope.get('userid')},"sum":${requestScope.get("user_cart").getPricesum()}},
             success:function (data) {
@@ -222,9 +222,8 @@
                         closeOnCancel:true
                     },function(isConfirm){
                         $.ajax({
-                            url:'${pageContext.request.contextPath}/Cart/pay/all',
+                            url:'${pageContext.request.contextPath}/cart/pay/all',
                             type:'POST',
-                            data:{"cartid":${requestScope.get('user_cart').getCartid()}},
                             success:function (data) {
                                 toastr.success("支付完成！");
                                 location.reload();
@@ -262,12 +261,12 @@
     }
     function addcharge() {
         $.ajax({
-            url:'${pageContext.request.contextPath}/Pay/recharge',
+            url:'${pageContext.request.contextPath}/pay/recharge',
             type:'POST',
             data:{"userid":${requestScope.get('userid')}},
             success:function (data) {
                 $.ajax({
-                    url:'${pageContext.request.contextPath}/Pay/page_pay',
+                    url:'${pageContext.request.contextPath}/pay/page_pay',
                     type:'POST',
                     data:{"WIDout_trade_no":data.WIDout_trade_no,"WIDsubject":data.WIDsubject,"WIDtotal_amount":${requestScope.get('user_cart').getPricesum()},"WIDbody":data.WIDbody},
                     success:function (data) {

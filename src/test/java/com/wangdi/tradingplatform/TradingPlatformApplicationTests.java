@@ -72,7 +72,7 @@ class TradingPlatformApplicationTests {
     public void resetPassword(){
         List<User> userList = userMapper.selectList(new QueryWrapper<>());
         for (User u:userList){
-            System.out.println(u.getAccount());
+//            System.out.println(u.getAccount());
             userCacheBloomFilter.add(u.getAccount());
         }
     }

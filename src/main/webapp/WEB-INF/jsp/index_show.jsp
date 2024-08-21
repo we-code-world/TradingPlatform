@@ -17,7 +17,7 @@
         </div>
 
         <div class="row">
-            <% String cls[] = {"ion-monitor", "ion-code-working", "ion-camera", "ion-android-phone-portrait", "ion-paintbrush", "ion-stats-bars"};
+            <% String[] cls = {"ion-monitor", "ion-code-working", "ion-camera", "ion-android-phone-portrait", "ion-paintbrush", "ion-stats-bars"};
                 int i = 0;
             %>
             <c:if test="${empty requestScope.get('buy_list')}">
@@ -78,13 +78,13 @@
                                 <div class="product-label">
                                     <span>New</span>
                                 </div>
-                                <a href="${pageContext.request.contextPath}/Sell/goodsdetail?id=${Sell.getGoodsid()}&userid=${requestScope.get('userid')}"><button class="main-btn quick-view"><i class="fa fa-eye"></i> 商品详情</button></a>
+                                <a href="${pageContext.request.contextPath}/goods/detail?id=${Sell.getGoodsid()}}"><button class="main-btn quick-view"><i class="fa fa-eye"></i> 商品详情</button></a>
                                 <img src="${pageContext.request.contextPath}${Sell.getPictureurl()}" alt="">
                             </div>
                             <div class="product-body">
                                 <h3 class="product-price">￥${Sell.getPrice()}</h3>
 
-                                <h2 class="product-name"><a href="${pageContext.request.contextPath}/Sell/goodsdetail?id=${Sell.getGoodsid()}&userid=${requestScope.get('userid')}">${Sell.getGoodsname()}</a></h2>
+                                <h2 class="product-name"><a href="${pageContext.request.contextPath}/goods/detail?id=${Sell.getGoodsid()}">${Sell.getGoodsname()}</a></h2>
                                 <div class="product-btns">
                                     <button class="primary-btn add-to-cart" onclick="change(${Sell.getGoodsid()},${requestScope.get('userid')})"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                                     &nbsp;&nbsp;&nbsp;

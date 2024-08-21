@@ -89,7 +89,7 @@ public class AdminController {
     @RequestMapping("/deal")
     public String deal(int id, Model model){
         Administrator administrator=manageService.findAdminByID(id);
-        List<Transaction> list=transactionService.findAll();
+        List<Transaction> list=manageService.findAll();
         model.addAttribute("admin",administrator);
         model.addAttribute("deals",list);
         return "ad_deal";
@@ -97,7 +97,7 @@ public class AdminController {
     @RequestMapping("/pagedeal")
     public String pagedeal(int id, int pageNum,int pageSize,Model model){
         Administrator administrator=manageService.findAdminByID(id);
-        PageInfo<Transaction> list=transactionService.pagefindAll(pageNum,pageSize);
+        PageInfo<Transaction> list=manageService.pagefindAll(pageNum,pageSize);
         model.addAttribute("admin",administrator);
         model.addAttribute("deals",list);
         //model.addAttribute("pagedeals",pagelist);
@@ -147,7 +147,7 @@ public class AdminController {
     public Map<String,Object> getdeal(int id){
         Map<String,Object> map=new HashMap<String,Object>();
         try{
-            Transaction deal=transactionService.findByID(id);
+            Transaction deal=manageService.findByID(id);
             map.put("deal",deal);
             map.put("result","ok");
         }catch (Exception e){
@@ -201,8 +201,8 @@ public class AdminController {
     public Map<String,Object> dealpass(int id){
         Map<String,Object> map=new HashMap<>();
         try{
-            Transaction deal=transactionService.findByID(id);
-            transactionService.updateByid(deal);
+            Transaction deal=manageService.findByID(id);
+            manageService.updateByid(deal);
             map.put("result","ok");
         }catch (Exception e){
             map.put("result","error");
@@ -249,8 +249,8 @@ public class AdminController {
     public Map<String,Object> dealRefuse(int id){
         Map<String,Object> map=new HashMap<>();
         try{
-            Transaction deal=transactionService.findByID(id);
-            transactionService.updateByid(deal);
+            Transaction deal=manageService.findByID(id);
+            manageService.updateByid(deal);
             map.put("result","ok");
         }catch (Exception e){
             map.put("result","error");

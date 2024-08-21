@@ -17,8 +17,6 @@ import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.concurrent.TimeUnit;
-
 @Service
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
@@ -99,8 +97,12 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String register(User user){
         if(!userCacheBloomFilter.contains(user.getAccount())){
+            user.setPassword(PasswordUtils.generateSaltPassword(user.getPassword()));
             userMapper.insert(user);
             userCacheBloomFilter.add(user.getAccount());
+            String token = TokenUtils.sign(user.getId());
+            distributedCache.put(token, user);
+            return token;
         }
         return null;
     }

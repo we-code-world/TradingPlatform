@@ -38,16 +38,10 @@ public class GoodsController {
         User user = loginService.getUser(token);
         list1=goodsService.findSellsByUser(user.getId());
         list2=goodsService.findBuysByUser(user.getId());
-        Cart user_cart = new Cart();
-        if(cartService.findByUser(user.getId())==null){
-            user_cart.setUserId(user.getId());
-            cartService.create(user_cart);
-        }else user_cart=cartService.findByUser(user.getId());
-        model.addAttribute("userid", user.getAccount());
-        model.addAttribute("goods_list",list1);
-        model.addAttribute("buy_list",list2);
-        model.addAttribute("user_cart",user_cart);
-        model.addAttribute("username",user.getAccount());
+        model.addAttribute("goods_list", list1);
+        model.addAttribute("buy_list", list2);
+        model.addAttribute("user_cart", cartService.getByUser(user.getId()));
+        model.addAttribute("username", user.getAccount());
         return "index";
     }
     @RequestMapping("/show")
@@ -56,9 +50,8 @@ public class GoodsController {
         String token = null;
         for (Cookie cookie: cookies) if ("token".equals(cookie.getName())) token = cookie.getValue();
         User user = loginService.getUser(token);
-        Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("userid", user.getAccount());
-        model.addAttribute("user_cart",user_cart);
+        model.addAttribute("user_cart", cartService.getByUser(user.getId()));
         return "wts";
     }
     @RequestMapping("/detail")
@@ -68,10 +61,9 @@ public class GoodsController {
         for (Cookie cookie: cookies) if ("token".equals(cookie.getName())) token = cookie.getValue();
         Goods good=goodsService.findByID(id);
         User user= loginService.getUser(token);
-        Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("goods",good);
         model.addAttribute("userid", user.getAccount());
-        model.addAttribute("user_cart",user_cart);
+        model.addAttribute("user_cart", cartService.getByUser(user.getId()));
         return "goodsdetail";
     }
 
@@ -140,9 +132,8 @@ public class GoodsController {
         String token = null;
         for (Cookie cookie: cookies) if ("token".equals(cookie.getName())) token = cookie.getValue();
         User user= loginService.getUser(token);
-        Cart user_cart=cartService.findByUser(user.getId());
         model.addAttribute("user",user);
-        model.addAttribute("user_cart",user_cart);
+        model.addAttribute("user_cart", cartService.getByUser(user.getId()));
         return "wtb";
     }
     @RequestMapping("/need/submit")
